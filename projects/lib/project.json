@@ -1,12 +1,12 @@
 {
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
-    "name": "lib",
+    "name": "@morgan-stanley/fdc3-web",
     "projectType": "library",
     "targets": {
         "build": {
             "executor": "@nx/js:tsc",
             "options": {
-                "outputPath": "{projectRoot}/dist/",
+                "outputPath": "{workspaceRoot}/dist/",
                 "rootDir": "{projectRoot}/src",
                 "main": "index.ts",
                 "tsConfig": "{projectRoot}/tsconfig.json",
