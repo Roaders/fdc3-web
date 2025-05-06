@@ -2,27 +2,64 @@
     "$schema": "./node_modules/nx/schemas/nx-schema.json",
     "targetDefaults": {
         "clean": {
-            "dependsOn": ["^clean"]
+            "dependsOn": [
+                "^clean"
+            ]
         },
         "build": {
-            "dependsOn": ["^build"],
-            "outputs": ["{workspaceRoot}/dist/"],
-            "cache": true
+            "dependsOn": [
+                "^build"
+            ],
+            "cache": true,
+            "options": {
+                "outputPath": "{workspaceRoot}/dist/",
+                "rootDir": "{projectRoot}/src",
+                "main": "index.ts",
+                "tsConfig": "{projectRoot}/tsconfig.json",
+                "assets": [
+                    {
+                        "input": "{workspaceRoot}",
+                        "glob": ".npmignore",
+                        "output": "./"
+                    },
+                    {
+                        "input": "{projectRoot}",
+                        "glob": "package.json",
+                        "output": "./"
+                    },
+                    {
+                        "input": "{projectRoot}",
+                        "glob": "README.md",
+                        "output": "./"
+                    }
+                ]
+            }
         },
         "test": {
-            "dependsOn": ["^test"],
-            "outputs": ["{workspaceRoot}/build/coverage-results/", "{workspaceRoot}/build/test-results/"],
+            "dependsOn": [
+                "^test"
+            ],
+            "outputs": [
+                "{workspaceRoot}/build/coverage-results/",
+                "{workspaceRoot}/build/test-results/"
+            ],
             "cache": true
         },
         "lint": {
-            "dependsOn": ["^lint"],
+            "dependsOn": [
+                "^lint"
+            ],
             "cache": true
         },
         "generate-docs": {
-            "dependsOn": ["^generate-docs"]
+            "dependsOn": [
+                "^generate-docs"
+            ]
         },
         "start": {
-            "dependsOn": ["^start"]
+            "dependsOn": [
+                "^start"
+            ]
         }
     },
     "defaultBase": "main",

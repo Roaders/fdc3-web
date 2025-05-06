@@ -4,30 +4,7 @@
     "projectType": "library",
     "targets": {
         "build": {
-            "executor": "@nx/js:tsc",
-            "options": {
-                "outputPath": "{workspaceRoot}/dist/",
-                "rootDir": "{projectRoot}/src",
-                "main": "index.ts",
-                "tsConfig": "{projectRoot}/tsconfig.json",
-                "assets": [
-                    {
-                        "input": "{workspaceRoot}",
-                        "glob": ".npmignore",
-                        "output": "./"
-                    },
-                    {
-                        "input": "{projectRoot}",
-                        "glob": "package.json",
-                        "output": "./"
-                    },
-                    {
-                        "input": "{projectRoot}",
-                        "glob": "README.md",
-                        "output": "./"
-                    }
-                ]
-            }
+            "executor": "@nx/js:tsc"
         }
     }
 }
