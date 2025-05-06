@@ -10,7 +10,33 @@
             "dependsOn": [
                 "^build"
             ],
-            "cache": true,
+            "cache": true
+        },
+        "test": {
+            "dependsOn": [
+                "^test"
+            ],
+            "outputs": [
+                "{workspaceRoot}/build/coverage-results/",
+                "{workspaceRoot}/build/test-results/"
+            ],
+            "cache": true
+        },
+        "lint": {
+            "dependsOn": [
+                "^lint"
+            ],
+            "cache": true
+        },
+        "generate-docs": {
+            "dependsOn": [
+                "^generate-docs"
+            ]
+        },
+        "@nx/js:tsc": {
+            "dependsOn": [
+                "^build"
+            ],
             "options": {
                 "outputPath": "{workspaceRoot}/dist/{projectName}",
                 "rootDir": "{projectRoot}/src",
@@ -34,32 +60,6 @@
                     }
                 ]
             }
-        },
-        "test": {
-            "dependsOn": [
-                "^test"
-            ],
-            "outputs": [
-                "{workspaceRoot}/build/coverage-results/",
-                "{workspaceRoot}/build/test-results/"
-            ],
-            "cache": true
-        },
-        "lint": {
-            "dependsOn": [
-                "^lint"
-            ],
-            "cache": true
-        },
-        "generate-docs": {
-            "dependsOn": [
-                "^generate-docs"
-            ]
-        },
-        "start": {
-            "dependsOn": [
-                "^start"
-            ]
         }
     },
     "defaultBase": "main",
@@ -85,12 +85,21 @@
             }
         },
         {
-            "plugin": "@nx/webpack/plugin",
+            "plugin": "@nx/vite/plugin",
             "options": {
                 "buildTargetName": "build",
                 "serveTargetName": "serve",
-                "previewTargetName": "preview"
+                "previewTargetName": "preview",
+                "testTargetName": "test"
             }
         }
-    ]
+    ],
+    "generators": {
+        "@nx/web:application": {
+            "style": "css",
+            "linter": "eslint",
+            "unitTestRunner": "none",
+            "e2eTestRunner": "none"
+        }
+    }
 }
