@@ -12,7 +12,7 @@
             ],
             "cache": true,
             "options": {
-                "outputPath": "{workspaceRoot}/dist/",
+                "outputPath": "{workspaceRoot}/dist/{projectName}",
                 "rootDir": "{projectRoot}/src",
                 "main": "index.ts",
                 "tsConfig": "{projectRoot}/tsconfig.json",
