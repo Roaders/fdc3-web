@@ -273,15 +273,15 @@ export class RootApp extends LitElement implements IOpenApplicationStrategy {
     private renderApps(): TemplateResult {
         return html`<div class="root-apps-container hstack flex-grow-1 gap-5 p-4 overflow-auto">
             ${this.appDetails.map(
-                details => html`
+            details => html`
                     <app-container
                         @onIframeCreated="${(event: CustomEvent<{ window: WindowProxy; app: WebAppDetails }>) =>
-                            this.handleNewIframe(event)}"
+                    this.handleNewIframe(event)}"
                         class="fth-app h-100"
                         .details=${details}
                     ></app-container>
                 `,
-            )}
+        )}
         </div>`;
     }
 

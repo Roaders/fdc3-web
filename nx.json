@@ -15,7 +15,7 @@
                 "outputPath": "{workspaceRoot}/dist/{projectName}",
                 "rootDir": "{projectRoot}/src",
                 "main": "index.ts",
-                "tsConfig": "{projectRoot}/tsconfig.json",
+                "tsConfig": "{projectRoot}/tsconfig.lib.json",
                 "assets": [
                     {
                         "input": "{workspaceRoot}",
@@ -87,8 +87,8 @@
         {
             "plugin": "@nx/webpack/plugin",
             "options": {
-                "buildTargetName": "webpack:build",
-                "serveTargetName": "webpack:serve",
+                "buildTargetName": "build",
+                "serveTargetName": "serve",
                 "previewTargetName": "preview"
             }
         }

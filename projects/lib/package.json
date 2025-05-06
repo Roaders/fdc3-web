@@ -1,5 +1,6 @@
 {
     "name": "@morgan-stanley/fdc3-web",
+    "type": "commonjs",
     "main": "index.js",
     "types": "index.d.ts",
     "version": "0.2.4",

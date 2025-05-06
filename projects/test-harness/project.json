@@ -4,29 +4,17 @@
     "projectType": "application",
     "targets": {
         "build": {
-            "executor": "@nx/js:tsc",
+            "executor": "@nx/webpack:webpack",
             "options": {
-                "outputPath": "{projectRoot}/dist/",
-                "rootDir": "{projectRoot}/src",
-                "main": "index.ts",
-                "tsConfig": "{projectRoot}/tsconfig.json",
-                "assets": [
-                    {
-                        "input": "{workspaceRoot}",
-                        "glob": ".npmignore",
-                        "output": "./"
-                    },
-                    {
-                        "input": "{projectRoot}",
-                        "glob": "package.json",
-                        "output": "./"
-                    },
-                    {
-                        "input": "{projectRoot}",
-                        "glob": "README.md",
-                        "output": "./"
-                    }
-                ]
+                "webpackConfig": "{projectRoot}/webpack.config.ts"
+            }
+        },
+        "serve": {
+            "executor": "@nx/webpack:dev-server",
+            "options": {
+                "buildTarget": "build",
+                "open": true,
+                "hmr": true
             }
         }
     }
