@@ -2,5 +2,17 @@
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "name": "test-harness",
     "projectType": "application",
-    "targets": {}
+    "targets": {
+        "serve": {
+            "dependsOn": [
+                "serve-ui"
+            ]
+        },
+        "serve-ui": {
+            "executor": "@nx/vite:dev-server",
+            "options": {
+                "buildTarget": "build"
+            }
+        }
+    }
 }
