@@ -9,8 +9,9 @@
  * and limitations under the License. */
 
 import { BrowserTypes } from '@finos/fdc3';
-import { AppDirectory } from '../app-directory/index.js';
 import { AppDirectoryApplication } from '../app-directory.contracts.js';
+import { AppDirectory } from '../app-directory/index.js';
+import { IRootPublisher } from '../contracts.internal.js';
 import {
     EventMessage,
     FullyQualifiedAppIdentifier,
@@ -22,7 +23,6 @@ import {
     RequestMessage,
     ResponseMessage,
 } from '../contracts.js';
-import { IRootPublisher } from '../contracts.internal.js';
 import {
     createLogger,
     generateUUID,

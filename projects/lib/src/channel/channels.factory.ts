@@ -9,8 +9,8 @@
  * and limitations under the License. */
 
 import type { BrowserTypes, Channel, PrivateChannel as FDC3PrivateChannel } from '@finos/fdc3';
-import { FullyQualifiedAppIdentifier, IProxyMessagingProvider } from '../contracts.js';
 import { IRootPublisher } from '../contracts.internal.js';
+import { FullyQualifiedAppIdentifier, IProxyMessagingProvider } from '../contracts.js';
 import { IChannelFactory } from './channel.contracts.js';
 import { PrivateChannel } from './channel.private.js';
 import { PublicChannel } from './channel.public.js';

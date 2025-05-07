@@ -9,11 +9,12 @@
  * and limitations under the License. */
 
 import { BrowserTypes, DesktopAgent, ImplementationMetadata, Intent, OpenError, ResolveError } from '@finos/fdc3';
-import { AppDirectory } from '../app-directory/index.js';
 import { AppDirectoryApplication } from '../app-directory.contracts.js';
-import { ChannelFactory } from '../channel/index.js';
+import { AppDirectory } from '../app-directory/index.js';
 import { ChannelMessageHandler } from '../channel/channel-message-handler.js';
+import { ChannelFactory } from '../channel/index.js';
 import { HEARTBEAT } from '../constants.js';
+import { IRootPublisher } from '../contracts.internal.js';
 import {
     AppIdentifierListenerPair,
     EventListenerKey,
@@ -22,7 +23,6 @@ import {
     IOpenApplicationStrategy,
     RequestMessage,
 } from '../contracts.js';
-import { IRootPublisher } from '../contracts.internal.js';
 import {
     appInstanceEquals,
     convertToEventListenerIndex,

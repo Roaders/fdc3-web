@@ -31,6 +31,7 @@ import {
 } from '@finos/fdc3';
 import { ChannelFactory, Channels } from '../channel/index.js';
 import { FullyQualifiedAppIdentifier, IProxyMessagingProvider } from '../contracts.js';
+import { convertToFDC3EventTypes } from '../helpers/event-type.helper.js';
 import {
     createRequestMessage,
     isAddEventListenerResponse,
@@ -55,7 +56,6 @@ import {
     resolveAppIdentifier,
     resolveContextType,
 } from '../helpers/index.js';
-import { convertToFDC3EventTypes } from '../helpers/event-type.helper.js';
 import { MessagingBase } from '../messaging/index.js';
 
 type ProxyDesktopAgentParams = {

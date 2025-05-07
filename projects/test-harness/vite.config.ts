@@ -1,8 +1,8 @@
 /// <reference types='vitest' />
-import { defineConfig } from 'vite';
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
-import { resolve } from "node:path"
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { resolve } from 'node:path';
+import { defineConfig } from 'vite';
 
 export default defineConfig(() => ({
     root: __dirname,
@@ -23,8 +23,8 @@ export default defineConfig(() => ({
         sourcemap: true,
         rollupOptions: {
             input: {
-                appOne: resolve(__dirname, "index.html")
-            }
-        }
+                appOne: resolve(__dirname, 'index.html'),
+            },
+        },
     },
 }));

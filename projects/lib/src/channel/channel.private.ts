@@ -17,6 +17,11 @@ import type {
 } from '@finos/fdc3';
 import { FullyQualifiedAppIdentifier, IProxyMessagingProvider } from '../contracts.js';
 import {
+    convertToPrivateChannelEventListenerTypes,
+    convertToPrivateChannelEventMessageTypes,
+    convertToPrivateChannelEventTypes,
+} from '../helpers/event-type.helper.js';
+import {
     createRequestMessage,
     generateUUID,
     isPrivateChannelAddEventListenerResponse,
@@ -27,11 +32,6 @@ import {
     isPrivateChannelOnUnsubscribeEvent,
     isPrivateChannelUnsubscribeEventListenerResponse,
 } from '../helpers/index.js';
-import {
-    convertToPrivateChannelEventListenerTypes,
-    convertToPrivateChannelEventMessageTypes,
-    convertToPrivateChannelEventTypes,
-} from '../helpers/event-type.helper.js';
 import { ContextListener } from './channel.contracts.js';
 import { PublicChannel } from './channel.public.js';
 

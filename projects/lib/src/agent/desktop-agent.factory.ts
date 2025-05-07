@@ -9,8 +9,8 @@
  * and limitations under the License. */
 
 import { AgentError, type DesktopAgent } from '@finos/fdc3';
-import { AppDirectory } from '../app-directory/index.js';
 import { DefaultResolver } from '../app-directory/app-resolver.default.js';
+import { AppDirectory } from '../app-directory/index.js';
 import { ChannelFactory } from '../channel/index.js';
 import {
     IRootMessagingProvider,
