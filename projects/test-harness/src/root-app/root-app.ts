@@ -8,9 +8,9 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import './root-app.scss';
-import './settings-panel';
-import './app-container';
+import './root-app.css';
+import './settings-panel.js';
+import './app-container.js';
 import { AppIdentifier, Channel, Context, OpenError } from '@finos/fdc3';
 import {
     AppDirectoryApplication,
@@ -30,7 +30,7 @@ import {
 import { AppResolverComponent } from '@morgan-stanley/fdc3-web-ui-provider';
 import { html, LitElement, TemplateResult } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { NEW_WINDOW_PUBLIC_CHANNEL, SELECT_APP_PUBLIC_CHANNEL } from '../constants';
+import { NEW_WINDOW_PUBLIC_CHANNEL, SELECT_APP_PUBLIC_CHANNEL } from '../constants.js';
 import {
     type AddApp,
     AppOpenedContextType,
@@ -43,7 +43,7 @@ import {
     SelectableAppsRequestContextType,
     SelectableAppsResponseContextType,
     SelectAppContextType,
-} from '../contracts';
+} from '../contracts.js';
 
 const log = createLogger('RootApp');
 
@@ -191,7 +191,6 @@ export class RootApp extends LitElement implements IOpenApplicationStrategy {
                 }
             }
 
-            return Promise.reject(`Window was null`); // TODO: use an approved error type
         }
 
         return Promise.reject(OpenError.ResolverUnavailable);
@@ -245,7 +244,7 @@ export class RootApp extends LitElement implements IOpenApplicationStrategy {
      * Utilizes LitElement's `html` template literal tag for defining the structure of the component's HTML.
      * @returns {TemplateResult} The template result for the root app's main content.
      */
-    protected render(): TemplateResult {
+    protected override render(): TemplateResult {
         return html`
             <div class="vstack vh-100 overflow-hidden bg-dark-subtle" @click=${this.handleOutsideClick}>
                 ${this.renderHeader()}
@@ -343,7 +342,7 @@ export class RootApp extends LitElement implements IOpenApplicationStrategy {
         }
     }
 
-    protected createRenderRoot(): HTMLElement {
+    protected override createRenderRoot(): HTMLElement {
         return this;
     }
 }

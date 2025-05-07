@@ -15,7 +15,7 @@ import type {
     PrivateChannel as FDC3PrivateChannel,
     PrivateChannelEventTypes,
 } from '@finos/fdc3';
-import { FullyQualifiedAppIdentifier, IProxyMessagingProvider } from '../contracts';
+import { FullyQualifiedAppIdentifier, IProxyMessagingProvider } from '../contracts.js';
 import {
     createRequestMessage,
     generateUUID,
@@ -26,14 +26,14 @@ import {
     isPrivateChannelOnDisconnectEvent,
     isPrivateChannelOnUnsubscribeEvent,
     isPrivateChannelUnsubscribeEventListenerResponse,
-} from '../helpers';
+} from '../helpers/index.js';
 import {
     convertToPrivateChannelEventListenerTypes,
     convertToPrivateChannelEventMessageTypes,
     convertToPrivateChannelEventTypes,
-} from '../helpers/event-type.helper';
-import { ContextListener } from './channel.contracts';
-import { PublicChannel } from './channel.public';
+} from '../helpers/event-type.helper.js';
+import { ContextListener } from './channel.contracts.js';
+import { PublicChannel } from './channel.public.js';
 
 /**
  * Object representing a private context channel, which is intended to support

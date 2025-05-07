@@ -1,6 +1,6 @@
 {
     "name": "@morgan-stanley/fdc3-web-test-harness",
-    "type": "commonjs",
+    "type": "module",
     "main": "index.html",
     "version": "1.0.0",
     "license": "Apache-2.0",

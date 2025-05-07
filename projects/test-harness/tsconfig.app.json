@@ -1,29 +1,24 @@
 {
-    "extends": "../../tsconfig.json",
-    "compilerOptions": {
-        "noEmit": true,
-        "target": "ESNext",
-        "useDefineForClassFields": true,
-        "module": "ESNext",
-        "lib": [
-            "ESNext",
-            "DOM"
-        ],
-        "moduleResolution": "Node",
-        "strict": true,
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "esModuleInterop": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noImplicitReturns": true,
-        "skipLibCheck": true,
-        "declaration": false
-    },
-    "exclude": [
-        "src/**/*.spec.ts"
-    ],
-    "include": [
-        "src/**/*.ts"
-    ]
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"noEmit": true,
+		"target": "ESNext",
+		"moduleResolution": "nodenext",
+		"useDefineForClassFields": true,
+		"module": "NodeNext",
+		"lib": ["ESNext", "DOM"],
+		"strict": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"skipLibCheck": true,
+		"declaration": false,
+        "emitDecoratorMetadata": false,
+        "sourceMap": true
+	},
+	"exclude": ["src/**/*.spec.ts"],
+	"include": ["src/**/*.ts"]
 }

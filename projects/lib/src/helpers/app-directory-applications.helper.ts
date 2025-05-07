@@ -9,9 +9,9 @@
  * and limitations under the License. */
 
 import { AppMetadata, BrowserTypes, ImplementationMetadata } from '@finos/fdc3';
-import { AppDirectoryApplication } from '../app-directory.contracts';
-import { FDC3_PROVIDER, FDC3_VERSION } from '../constants';
-import { FullyQualifiedAppIdentifier } from '../contracts';
+import { AppDirectoryApplication } from '../app-directory.contracts.js';
+import { FDC3_PROVIDER, FDC3_VERSION } from '../constants.js';
+import { FullyQualifiedAppIdentifier } from '../contracts.js';
 
 /**
  * Fetches app directory applications from single app directory url

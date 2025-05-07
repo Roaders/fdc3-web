@@ -3,11 +3,10 @@ import { defineConfig } from 'vite';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
 import { resolve } from "node:path"
-import checker from 'vite-plugin-checker';
 
 export default defineConfig(() => ({
     root: __dirname,
-    cacheDir: '../../node_modules/.vite/projects/test-app',
+    cacheDir: '../../node_modules/.vite/projects/test-harness',
     server: {
         port: 4200,
         host: 'localhost',
@@ -16,18 +15,15 @@ export default defineConfig(() => ({
         port: 4300,
         host: 'localhost',
     },
-    plugins: [nxViteTsPaths(), nxCopyAssetsPlugin(['*.md']), checker({ typescript: true })],
+    plugins: [nxViteTsPaths(), nxCopyAssetsPlugin(['*.md', '*.svg'])],
     build: {
-        outDir: '../../dist/projects/test-app',
-
+        outDir: '../../build/test-harness',
         emptyOutDir: true,
         reportCompressedSize: true,
-        commonjsOptions: {
-            transformMixedEsModules: true,
-        },
+        sourcemap: true,
         rollupOptions: {
             input: {
-                appOne: resolve(__dirname, "src/root-app/index.html")
+                appOne: resolve(__dirname, "index.html")
             }
         }
     },

@@ -33,7 +33,7 @@ export class SelectComponent extends LitElement {
         return this.selectElement.value;
     }
 
-    public updated(changedProperties: PropertyValues | Map<PropertyKey, unknown>): void {
+    public override updated(changedProperties: PropertyValues | Map<PropertyKey, unknown>): void {
         super.updated(changedProperties);
         if (changedProperties.has('items')) {
             if (Array.isArray(this.items)) {
@@ -44,7 +44,7 @@ export class SelectComponent extends LitElement {
         }
     }
 
-    protected render(): TemplateResult {
+    protected override render(): TemplateResult {
         return html`
             <select class="form-select">
                 ${this.itemsToDisplay.map(item => html`<option>${item}</option>`)}
@@ -52,7 +52,7 @@ export class SelectComponent extends LitElement {
         `;
     }
 
-    protected createRenderRoot(): HTMLElement {
+    protected override createRenderRoot(): HTMLElement {
         return this;
     }
 }
