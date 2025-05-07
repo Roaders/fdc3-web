@@ -1,7 +1,7 @@
 {
     "extends": "../../tsconfig.json",
-    "files": [],
     "compilerOptions": {
+        "noEmit": true,
         "target": "ESNext",
         "useDefineForClassFields": true,
         "module": "ESNext",
@@ -20,10 +20,10 @@
         "skipLibCheck": true,
         "declaration": false
     },
-    "include": [
-        "src"
-    ], 
     "exclude": [
-        "**/*.spec.ts"
+        "src/**/*.spec.ts"
+    ],
+    "include": [
+        "src/**/*.ts"
     ]
 }

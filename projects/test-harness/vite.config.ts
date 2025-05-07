@@ -17,10 +17,6 @@ export default defineConfig(() => ({
         host: 'localhost',
     },
     plugins: [nxViteTsPaths(), nxCopyAssetsPlugin(['*.md']), checker({ typescript: true })],
-    // Uncomment this if you are using workers.
-    // worker: {
-    //  plugins: [ nxViteTsPaths() ],
-    // },
     build: {
         outDir: '../../dist/projects/test-app',
 
@@ -31,8 +27,7 @@ export default defineConfig(() => ({
         },
         rollupOptions: {
             input: {
-                appOne: resolve(__dirname, "app.html"),
-                appTwo: resolve(__dirname, "appTwo.html")
+                appOne: resolve(__dirname, "src/root-app/index.html")
             }
         }
     },
