@@ -13,6 +13,29 @@
             "options": {
                 "buildTarget": "build"
             }
+        },
+        "build-node": {
+            "executor": "@nx/esbuild:esbuild",
+            "options": {
+                "outputPath": "build/server/{projectName}",
+                "format": [
+                    "esm"
+                ],
+                "main": "{projectRoot}/src/server/index.ts",
+                "tsConfig": "{projectRoot}/tsconfig.server.json"
+            }
+        },
+        "serve-node": {
+            "continuous": true,
+            "executor": "@nx/js:node",
+            "defaultConfiguration": "development",
+            "dependsOn": [
+                "build-node"
+            ],
+            "options": {
+                "buildTarget": "test-harness:build-node",
+                "runBuildTargetDependencies": false
+            }
         }
     }
 }

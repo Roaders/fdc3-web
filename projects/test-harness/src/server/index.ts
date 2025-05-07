@@ -10,12 +10,12 @@
 
 const configFileName = process.env.APP_DIRECTORY_CONFIG_FILE_PATH ?? './src/test-harness.config.json';
 
-const path = require('path');
-const express = require('express');
-const cors = require('cors');
+import {resolve} from "path";
+import express from "express";
+import cors from "cors";
 
 //can swap in different config files
-const config = require(configFileName);
+const config = await import(configFileName);
 
 const basePort = 4300;
 
@@ -24,9 +24,9 @@ const basePort = 4300;
  * @param {string} folder - The path to the folder containing static files to serve.
  * @param {number} port - The port number on which the server will listen.
  */
-function createServer(domain, folder, port) {
+function createServer(domain: string, folder: string, port: number) {
     const app = express();
-    const folderPath = path.resolve(__dirname, folder);
+    const folderPath = resolve(__dirname, folder);
     //allows all origins to access server resources
     //TODO: add mapping from root domain to default apps folder to server default app from root domain as well as from secondary domains
     app.use(cors(), express.static(folderPath));
@@ -41,8 +41,8 @@ if (configFileName === './src/test-harness.config.json') {
         new Set([
             'root',
             ...config.applications
-                .map(app => app.appId.substring(app.appId.indexOf('-', 4) + 1))
-                .filter(domain => domain),
+                .map((app: any) => app.appId.substring(app.appId.indexOf('-', 4) + 1))
+                .filter((domain: string) => domain),
         ]),
     );
 

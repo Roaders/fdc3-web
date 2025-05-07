@@ -2,41 +2,26 @@
     "$schema": "./node_modules/nx/schemas/nx-schema.json",
     "targetDefaults": {
         "clean": {
-            "dependsOn": [
-                "^clean"
-            ]
+            "dependsOn": ["^clean"]
         },
         "build": {
-            "dependsOn": [
-                "^build"
-            ],
+            "dependsOn": ["^build"],
             "cache": true
         },
         "test": {
-            "dependsOn": [
-                "^test"
-            ],
-            "outputs": [
-                "{workspaceRoot}/build/coverage-results/",
-                "{workspaceRoot}/build/test-results/"
-            ],
+            "dependsOn": ["^test"],
+            "outputs": ["{workspaceRoot}/build/coverage-results/", "{workspaceRoot}/build/test-results/"],
             "cache": true
         },
         "lint": {
-            "dependsOn": [
-                "^lint"
-            ],
+            "dependsOn": ["^lint"],
             "cache": true
         },
         "generate-docs": {
-            "dependsOn": [
-                "^generate-docs"
-            ]
+            "dependsOn": ["^generate-docs"]
         },
         "@nx/js:tsc": {
-            "dependsOn": [
-                "^build"
-            ],
+            "dependsOn": ["^build"],
             "options": {
                 "outputPath": "{workspaceRoot}/dist/{projectName}",
                 "rootDir": "{projectRoot}/src",
@@ -60,6 +45,11 @@
                     }
                 ]
             }
+        },
+        "@nx/esbuild:esbuild": {
+            "cache": true,
+            "dependsOn": ["^build"],
+            "inputs": ["default", "^default"]
         }
     },
     "defaultBase": "main",
