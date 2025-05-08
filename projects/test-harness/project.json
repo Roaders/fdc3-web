@@ -4,25 +4,57 @@
     "projectType": "application",
     "targets": {
         "serve": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": [
+                    {
+                        "command": "nx serve-node test-harness"
+                    },
+                    {
+                        "command": "nx serve-ui test-harness"
+                    }
+                ],
+                "parallel": true
+            }
+        },
+        "build": {
             "dependsOn": [
-                "serve-ui"
+                "build-node",
+                "build-ui"
             ]
         },
         "serve-ui": {
             "executor": "@nx/vite:dev-server",
             "options": {
-                "buildTarget": "build"
+                "buildTarget": "build-ui",
+                "open": "index.html",
+                "port": 4200
+            }
+        },
+        "build-ui": {
+            "executor": "@nx/vite:build",
+            "options": {
+                "outputPath": "build/{projectName}/ui",
+                "tsConfig": "{projectRoot}/tsconfig.app.json",
+                "sourceMap": true
             }
         },
         "build-node": {
             "executor": "@nx/esbuild:esbuild",
             "options": {
-                "outputPath": "build/server/{projectName}",
+                "outputPath": "build/{projectName}/node",
                 "format": [
                     "esm"
                 ],
                 "main": "{projectRoot}/src/server/index.ts",
-                "tsConfig": "{projectRoot}/tsconfig.server.json"
+                "tsConfig": "{projectRoot}/tsconfig.server.json",
+                "assets": [
+                    {
+                        "glob": "**/*",
+                        "input": "{projectRoot}/src/server/assets",
+                        "output": "./assets"
+                    }
+                ]
             }
         },
         "serve-node": {
@@ -30,7 +62,7 @@
             "executor": "@nx/js:node",
             "defaultConfiguration": "development",
             "dependsOn": [
-                "build-node"
+                "build-ui"
             ],
             "options": {
                 "buildTarget": "test-harness:build-node",

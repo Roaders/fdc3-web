@@ -21,7 +21,7 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 @customElement('select-component')
 export class SelectComponent extends LitElement {
     @property()
-    public items!: string[] | Promise<string[]>;
+    public items: string[] | undefined;
 
     @state()
     private itemsToDisplay: string[] = [];
@@ -35,11 +35,10 @@ export class SelectComponent extends LitElement {
 
     public override updated(changedProperties: PropertyValues | Map<PropertyKey, unknown>): void {
         super.updated(changedProperties);
+
         if (changedProperties.has('items')) {
             if (Array.isArray(this.items)) {
                 this.itemsToDisplay = [...this.items];
-            } else {
-                this.items.then(items => (this.itemsToDisplay = [...items]));
             }
         }
     }

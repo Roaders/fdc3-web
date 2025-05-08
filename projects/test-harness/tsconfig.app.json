@@ -3,9 +3,7 @@
 	"compilerOptions": {
 		"noEmit": true,
 		"target": "ESNext",
-		"moduleResolution": "nodenext",
 		"useDefineForClassFields": true,
-		"module": "NodeNext",
 		"lib": ["ESNext", "DOM"],
 		"strict": true,
 		"resolveJsonModule": true,

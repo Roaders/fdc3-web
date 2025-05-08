@@ -18,7 +18,7 @@ import { FullyQualifiedAppIdentifier } from '../contracts.js';
  */
 export async function getAppDirectoryApplications(url: string): Promise<AppDirectoryApplication[]> {
     try {
-        const response = await fetch(`${url}/v2/apps`).then(response => response.json());
+        const response = await fetch(`${url}/v2/apps`).then(response => response.json()); // TODO: retry if initial fetch fails
         if (response.message != 'OK' || response.applications == null) {
             //request has failed for this app directory url
             return [];

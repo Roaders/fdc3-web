@@ -17,13 +17,15 @@ export default defineConfig(() => ({
     },
     plugins: [nxViteTsPaths(), nxCopyAssetsPlugin(['*.md', '*.svg'])],
     build: {
-        outDir: '../../build/test-harness',
+        outDir: '../../build/test-harness/ui',
         emptyOutDir: true,
         reportCompressedSize: true,
         sourcemap: true,
         rollupOptions: {
             input: {
-                appOne: resolve(__dirname, 'index.html'),
+                rootApp: resolve(__dirname, 'index.html'),
+                appA: resolve(__dirname, 'app-a.html'),
+                appB: resolve(__dirname, 'app-b.html'),
             },
         },
     },

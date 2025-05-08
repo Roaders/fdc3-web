@@ -10,11 +10,12 @@
 
 import '../utils/list-component.js';
 import '../utils/header-component.js';
+import '../utils/select-component.js';
 import { AppDirectoryApplication } from '@morgan-stanley/fdc3-web';
 import { html, LitElement, TemplateResult } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import type { AddApp } from '../contracts.js';
-import { SelectComponent } from '../utils/select-component.js';
+import type { SelectComponent } from '../utils/select-component.js';
 
 /**
  * `SettingsPanel` is a LitElement component responsible for rendering and managing the settings interface of the application. It allows users to select applications,
@@ -27,18 +28,10 @@ import { SelectComponent } from '../utils/select-component.js';
 @customElement('settings-panel')
 export class SettingsPanel extends LitElement {
     @property()
-    public applications!: Promise<AppDirectoryApplication[]>;
-
-    @state()
-    private appDirectory: AppDirectoryApplication[] = [];
+    private applications: AppDirectoryApplication[] = [];
 
     @query('select-component')
     private appSelector!: SelectComponent;
-
-    public override connectedCallback(): void {
-        super.connectedCallback();
-        this.applications.then(applications => (this.appDirectory = applications));
-    }
 
     protected override render(): TemplateResult {
         return html`
@@ -59,7 +52,7 @@ export class SettingsPanel extends LitElement {
         return html`
             <div>
                 <label class="form-label">Select App:</label>
-                <select-component .items=${this.appDirectory.map(app => app.appId)}></select-component>
+                <select-component .items=${this.applications.map(app => app.appId)}></select-component>
             </div>
         `;
     }
@@ -82,7 +75,7 @@ export class SettingsPanel extends LitElement {
      * the application information for further processing.
      */
     private async onAddApp(): Promise<void> {
-        const selectedApp = (await this.applications).find(app => app.appId === this.appSelector.value);
+        const selectedApp = this.applications?.find(app => app.appId === this.appSelector.value);
         if (!selectedApp) return;
         this.dispatchEvent(
             new CustomEvent<AddApp>('addApp', {

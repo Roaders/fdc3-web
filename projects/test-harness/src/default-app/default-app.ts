@@ -11,8 +11,9 @@
 import '../utils/list-component.js';
 import '../utils/header-component.js';
 import '../root-app/app-container.js';
-import '../styles.scss';
+import '../styles.css';
 import '@morgan-stanley/fdc3-web-ui-provider';
+import '../utils/select-component.js';
 import type {
     Channel,
     Context,
@@ -52,7 +53,7 @@ import {
     SelectAppContextType,
 } from '../contracts.js';
 import { getStandardIntents } from '../utils/fdc3.js';
-import { SelectComponent } from '../utils/select-component.js';
+import type { SelectComponent } from '../utils/select-component.js';
 
 const log = createLogger('DefaultApp');
 

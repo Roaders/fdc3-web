@@ -66,7 +66,8 @@ export class RootApp extends LitElement implements IOpenApplicationStrategy {
 
     private openedWindowChannel?: Channel;
 
-    private applications: Promise<AppDirectoryApplication[]>;
+    @state()
+    private applications: AppDirectoryApplication[] = [];
 
     constructor() {
         super();
@@ -80,21 +81,27 @@ export class RootApp extends LitElement implements IOpenApplicationStrategy {
                 }),
         });
 
-        this.applications = Promise.allSettled(
-            appDirectoryUrls.map(appDirectoryUrl => {
-                const hostname = new URL(appDirectoryUrl).hostname;
-                return getAppDirectoryApplications(appDirectoryUrl)
-                    .then(
-                        applications =>
-                            applications
-                                .filter(app => app.appId !== 'test-harness-root-app') //test-harness-root-app is the container and so is always open
-                                .map(app => ({ ...app, appId: `${app.appId}@${hostname}` })), //make appIds fully qualified
-                    )
-                    .catch(() => []);
-            }),
-        ).then(results => results.filter(result => result.status === 'fulfilled').flatMap(result => result.value));
+        this.loadApplications();
+    }
+
+    private async loadApplications(): Promise<void> {
+        const directoryResults = await Promise.allSettled(appDirectoryUrls.map(url => this.loadAppDirectory(url)));
+
+        this.applications = directoryResults
+            .filter(result => result.status === 'fulfilled')
+            .flatMap(result => result.value);
 
         this.initApp();
+    }
+
+    private async loadAppDirectory(url: string): Promise<AppDirectoryApplication[]> {
+        const hostname = new URL(url).hostname;
+
+        const applications = await getAppDirectoryApplications(url).catch(() => []);
+
+        return applications
+            .filter(app => app.appId !== 'test-harness-root-app') //test-harness-root-app is the container and so is always open
+            .map(app => ({ ...app, appId: `${app.appId}@${hostname}` })); //make appIds fully qualified
     }
 
     public async canOpen(params: OpenApplicationStrategyParams): Promise<boolean> {
@@ -197,11 +204,9 @@ export class RootApp extends LitElement implements IOpenApplicationStrategy {
 
     private async initApp(): Promise<void> {
         //open all apps in root domain by default
-        this.applications.then(applications =>
-            applications
-                .filter(application => application.appId.includes('root'))
-                .forEach(application => this.openAppInfo(application)),
-        );
+        this.applications
+            .filter(application => application.appId.includes('root'))
+            .forEach(application => this.openAppInfo(application));
 
         await this.subscribeToSelectedApp();
 
