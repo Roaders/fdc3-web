@@ -10,8 +10,10 @@
 
 import { AgentError, DesktopAgent } from '@finos/fdc3';
 import { Mock } from '@morgan-stanley/ts-mocking-bird';
-import { FDC3_READY_EVENT } from '../constants';
-import { getAgent, resetCachedPromise } from './get-agent';
+import { FDC3_READY_EVENT } from '../constants.js';
+import { getAgent, resetCachedPromise } from './get-agent.js';
+
+import { describe, it, beforeEach, expect } from "vitest";
 
 describe('getAgent', () => {
     // Mock agent to be used in tests

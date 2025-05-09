@@ -14,7 +14,9 @@ import {
     isFullyQualifiedAppId,
     isFullyQualifiedAppIdentifier,
     isNonEmptyArray,
-} from './type-predicate.helper';
+} from './type-predicate.helper.js';
+
+import { describe, it, beforeEach, expect } from "vitest";
 
 const defaultInvalidValues: unknown[] = ['', 'simpleString', [], {}, null, undefined];
 

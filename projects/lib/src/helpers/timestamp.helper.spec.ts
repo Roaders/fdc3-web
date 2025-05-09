@@ -8,7 +8,9 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import { getTimestamp } from './timestamp.helper';
+import { getTimestamp } from './timestamp.helper.js';
+
+import { describe, it, beforeEach, expect } from "vitest";
 
 describe(`${getTimestamp.name} (timestamp.helper)`, () => {
     it('should return Date object describing current date', () => {

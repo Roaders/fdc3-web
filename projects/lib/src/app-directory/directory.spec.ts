@@ -10,17 +10,19 @@
 
 import { type AppIdentifier, type AppIntent, type Contact, type Context, type Intent, ResolveError } from '@finos/fdc3';
 import { IMocked, Mock, proxyJestModule, registerMock, setupFunction } from '@morgan-stanley/ts-mocking-bird';
-import { AppDirectoryApplication, AppDirectoryApplicationType, WebAppDetails } from '../app-directory.contracts';
+import { AppDirectoryApplication, AppDirectoryApplicationType, WebAppDetails } from '../app-directory.contracts.js';
 import {
     FullyQualifiedAppIdentifier,
     IAppResolver,
     ResolveForContextPayload,
     ResolveForIntentPayload,
-} from '../contracts';
-import * as helpersImport from '../helpers';
-import { AppDirectory } from './directory';
+} from '../contracts.js';
+import * as helpersImport from '../helpers/index.js';
+import { AppDirectory } from './directory.js';
 
-jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
+import { describe, it, beforeEach, expect } from "vitest";
+
+// jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
 
 const mockedAppIdOne = `app-id-one@mock-app-directory`;
 const mockedAppIdTwo = `app-id-two@mock-app-directory`;

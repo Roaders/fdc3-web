@@ -17,20 +17,22 @@ import {
     setupFunction,
     setupProperty,
 } from '@morgan-stanley/ts-mocking-bird';
-import { AppDirectory } from '../app-directory';
-import { AppDirectoryApplication } from '../app-directory.contracts';
-import { FDC3_PROVIDER, FDC3_VERSION } from '../constants';
+import { AppDirectory } from '../app-directory/index.js';
+import { AppDirectoryApplication } from '../app-directory.contracts.js';
+import { FDC3_PROVIDER, FDC3_VERSION } from '../constants.js';
 import {
     FullyQualifiedAppIdentifier,
     IncomingMessageCallback,
     IProxyIncomingMessageEnvelope,
     IRootMessagingProvider,
     RequestMessage,
-} from '../contracts';
-import * as helpersImport from '../helpers';
-import { RootMessagePublisher } from './root-message-publisher';
+} from '../contracts.js';
+import * as helpersImport from '../helpers/index.js';
+import { RootMessagePublisher } from './root-message-publisher.js';
 
-jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
+import { describe, it, beforeEach, expect } from "vitest";
+
+// jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
 
 const mockedDate = new Date(2024, 1, 0, 0, 0, 0);
 const mockedRootGeneratedUuid = `mocked-root-generated-Uuid`;

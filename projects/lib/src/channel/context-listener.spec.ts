@@ -34,18 +34,20 @@ import {
     IProxyOutgoingMessageEnvelope,
     Message,
     ResponseMessage,
-} from '../contracts';
+} from '../contracts.js';
 import {
     isAddContextListenerRequest,
     isAddEventListenerRequest,
     isGetCurrentChannelRequest,
     isGetCurrentContextRequest,
-} from '../helpers';
-import * as helpersImport from '../helpers';
-import { ChannelFactory } from './channels.factory';
-import { ContextListener } from './context-listener';
+} from '../helpers/index.js';
+import * as helpersImport from '../helpers/index.js';
+import { ChannelFactory } from './channels.factory.js';
+import { ContextListener } from './context-listener.js';
 
-jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
+import { describe, it, beforeEach, expect } from "vitest";
+
+// jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
 
 const mockedAppId = `mocked-app-id`;
 const mockedInstanceId = `mocked-instance-id`;

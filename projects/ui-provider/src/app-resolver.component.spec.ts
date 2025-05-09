@@ -10,7 +10,8 @@
 
 import { AppIdentifier, AppIntent, Context, DesktopAgent, IntentMetadata, ResolveError } from '@finos/fdc3';
 import { IMocked, Mock, setupFunction } from '@morgan-stanley/ts-mocking-bird';
-import { AppResolverComponent } from './app-resolver.component';
+import { AppResolverComponent } from './app-resolver.component.js';
+import { describe, it, beforeEach, expect } from "vitest";
 
 const mockedTargetAppId = `mocked-target-app-id`;
 const mockedTargetInstanceId = `mocked-target-instance-id`;
@@ -188,7 +189,7 @@ describe(`${AppResolverComponent.name} (app-resolver.component)`, () => {
                     )[1] as HTMLElement
             ).click();
 
-            expect(appIdentifierPromise).resolves.toEqual({ appId: 'app-one', instanceId: 'app-one-instance-two' });
+            await expect(appIdentifierPromise).resolves.toEqual({ appId: 'app-one', instanceId: 'app-one-instance-two' });
         });
 
         it('should return promise which rejects with ResolveError.UserCancelled if user clicks close button', async () => {
@@ -215,7 +216,7 @@ describe(`${AppResolverComponent.name} (app-resolver.component)`, () => {
                     ?.shadowRoot?.querySelector('.ms-app-resolver-popup-dismiss-btn') as HTMLElement
             ).click();
 
-            expect(appIntentPromise).rejects.toEqual(ResolveError.UserCancelled);
+            await expect(appIntentPromise).rejects.toEqual(ResolveError.UserCancelled);
         });
     });
 
@@ -358,7 +359,7 @@ describe(`${AppResolverComponent.name} (app-resolver.component)`, () => {
                     )[1] as HTMLElement
             ).click();
 
-            expect(appIntentPromise).resolves.toEqual({
+            await expect(appIntentPromise).resolves.toEqual({
                 intent: intent.name,
                 app: { appId: 'app-one', instanceId: 'app-one-instance-two' },
             });
@@ -387,7 +388,7 @@ describe(`${AppResolverComponent.name} (app-resolver.component)`, () => {
                     ?.shadowRoot?.querySelector('.ms-app-resolver-popup-dismiss-btn') as HTMLElement
             ).click();
 
-            expect(appIntentPromise).rejects.toEqual(ResolveError.UserCancelled);
+            await expect(appIntentPromise).rejects.toEqual(ResolveError.UserCancelled);
         });
     });
 
@@ -404,7 +405,7 @@ describe(`${AppResolverComponent.name} (app-resolver.component)`, () => {
 
             await instance.selectApp(appIdentifier, intent.name);
 
-            expect(appIdentifierPromise).resolves.toEqual(appIdentifier);
+            await expect(appIdentifierPromise).resolves.toEqual(appIdentifier);
         });
     });
 
@@ -429,7 +430,7 @@ describe(`${AppResolverComponent.name} (app-resolver.component)`, () => {
 
             instance.closePopup();
 
-            expect(appIdentifierPromise).rejects.toEqual(ResolveError.UserCancelled);
+            await expect(appIdentifierPromise).rejects.toEqual(ResolveError.UserCancelled);
         });
     });
 

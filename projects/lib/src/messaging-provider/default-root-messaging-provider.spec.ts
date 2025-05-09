@@ -18,11 +18,13 @@ import {
     setupFunction,
     setupProperty,
 } from '@morgan-stanley/ts-mocking-bird';
-import { IncomingMessageCallback, IRootIncomingMessageEnvelope, IRootOutgoingMessageEnvelope } from '../contracts';
-import * as helpersImport from '../helpers';
-import { DefaultRootMessagingProvider } from './default-root-messaging-provider';
+import { IncomingMessageCallback, IRootIncomingMessageEnvelope, IRootOutgoingMessageEnvelope } from '../contracts.js';
+import * as helpersImport from '../helpers/index.js';
+import { DefaultRootMessagingProvider } from './default-root-messaging-provider.js';
 
-jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
+import { describe, it, beforeEach, expect } from "vitest";
+
+// jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
 
 const mockedDate = new Date(2024, 1, 0, 0, 0, 0);
 const mockedGeneratedUuid = `mocked-generated-Uuid`;

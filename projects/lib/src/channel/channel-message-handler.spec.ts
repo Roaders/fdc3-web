@@ -17,20 +17,22 @@ import {
     setupFunction,
     setupProperty,
 } from '@morgan-stanley/ts-mocking-bird';
-import { HEARTBEAT } from '../constants';
+import { HEARTBEAT } from '../constants.js';
 import {
     EventListenerLookup,
     EventMessage,
     FullyQualifiedAppIdentifier,
     IProxyMessagingProvider,
     ResponseMessage,
-} from '../contracts';
-import { IRootPublisher } from '../contracts.internal';
-import * as helpersImport from '../helpers';
-import { ChannelMessageHandler } from './channel-message-handler';
-import { recommendedChannels } from './default-channels';
+} from '../contracts.js';
+import { IRootPublisher } from '../contracts.internal.js';
+import * as helpersImport from '../helpers/index.js';
+import { ChannelMessageHandler } from './channel-message-handler.js';
+import { recommendedChannels } from './default-channels.js';
 
-jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
+import { describe, it, beforeEach, expect } from "vitest";
+
+// jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
 
 const mockedTargetAppId = `mocked-target-app-id`;
 const mockedTargetInstanceId = `mocked-target-instance-id`;
@@ -783,15 +785,15 @@ describe(`${ChannelMessageHandler.name} (channel-message-handler)`, () => {
             instance.onPrivateChannelAddEventListenerRequest(privateChannelAddEventListenerMessage, source);
 
             const privateChannelUnsubscribeEventListenerRequest: BrowserTypes.PrivateChannelUnsubscribeEventListenerRequest =
-                {
-                    meta: {
-                        requestUuid: mockedRequestUuid,
-                        timestamp: mockedDate,
-                        source,
-                    },
-                    payload: { listenerUUID: 'mocked-generated-Uuid' },
-                    type: 'privateChannelUnsubscribeEventListenerRequest',
-                };
+            {
+                meta: {
+                    requestUuid: mockedRequestUuid,
+                    timestamp: mockedDate,
+                    source,
+                },
+                payload: { listenerUUID: 'mocked-generated-Uuid' },
+                type: 'privateChannelUnsubscribeEventListenerRequest',
+            };
 
             instance.onPrivateChannelUnsubscribeEventListenerRequest(
                 privateChannelUnsubscribeEventListenerRequest,

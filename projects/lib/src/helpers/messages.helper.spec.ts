@@ -10,13 +10,15 @@
 
 import { BrowserTypes } from '@finos/fdc3';
 import { IMocked, Mock, proxyJestModule, registerMock, setupFunction } from '@morgan-stanley/ts-mocking-bird';
-import { FullyQualifiedAppIdentifier, RequestMessage } from '../contracts';
-import { createEvent, createRequestMessage, createResponseMessage } from './messages.helper';
-import * as timestampImport from './timestamp.helper';
-import * as uuidImport from './uuid.helper';
+import { FullyQualifiedAppIdentifier, RequestMessage } from '../contracts.js';
+import { createEvent, createRequestMessage, createResponseMessage } from './messages.helper.js';
+import * as timestampImport from './timestamp.helper.js';
+import * as uuidImport from './uuid.helper.js';
 
-jest.mock('./uuid.helper', () => proxyJestModule(require.resolve('./uuid.helper')));
-jest.mock('./timestamp.helper', () => proxyJestModule(require.resolve('./timestamp.helper')));
+import { describe, it, beforeEach, expect } from "vitest";
+
+// jest.mock('./uuid.helper', () => proxyJestModule(require.resolve('./uuid.helper')));
+// jest.mock('./timestamp.helper', () => proxyJestModule(require.resolve('./timestamp.helper')));
 
 type NonOptionalMessage<
     T extends BrowserTypes.AppRequestMessage | BrowserTypes.AgentResponseMessage | BrowserTypes.AgentEventMessage,

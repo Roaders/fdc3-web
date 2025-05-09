@@ -8,7 +8,9 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import { convertToEventListenerIndex, convertToFDC3EventTypes } from './event-type.helper';
+import { convertToEventListenerIndex, convertToFDC3EventTypes } from './event-type.helper.js';
+
+import { describe, it, beforeEach, expect } from "vitest";
 
 describe(`event-type.helper`, () => {
     describe(`${convertToFDC3EventTypes.name} (event-type.helper)`, () => {

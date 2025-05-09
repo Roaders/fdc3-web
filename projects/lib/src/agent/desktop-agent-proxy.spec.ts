@@ -29,28 +29,40 @@ import { OpenError, ResolveError } from '@finos/fdc3';
 import {
     IMocked,
     Mock,
-    proxyJestModule,
-    registerMock,
     setupFunction,
     setupProperty,
     toBe,
 } from '@morgan-stanley/ts-mocking-bird';
-import { AppDirectory } from '../app-directory';
-import { ChannelFactory, Channels } from '../channel';
-import { ChannelMessageHandler } from '../channel/channel-message-handler';
+import { AppDirectory } from '../app-directory/index.js';
+import { ChannelFactory, Channels } from '../channel/index.js';
+import { ChannelMessageHandler } from '../channel/channel-message-handler.js';
 import {
     EventMessage,
     FullyQualifiedAppIdentifier,
     IProxyMessagingProvider,
     IProxyOutgoingMessageEnvelope,
     ResponseMessage,
-} from '../contracts';
-import * as helpersImport from '../helpers';
-import { RootMessagePublisher } from '../messaging/';
-import { DesktopAgentImpl } from './desktop-agent';
-import { DesktopAgentProxy } from './desktop-agent-proxy';
+} from '../contracts.js';
+import { RootMessagePublisher } from '../messaging/index.js';
+import { DesktopAgentImpl } from './desktop-agent.js';
+import { DesktopAgentProxy } from './desktop-agent-proxy.js';
 
-jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
+import { describe, it, beforeEach, expect, vi } from "vitest";
+
+vi.mock("../helpers", async originalPromise => {
+    const original: any = await originalPromise()
+
+    return {
+        ...original, generateUUID: () => mockedRequestUuid, getTimestamp: () => mockedDate,
+        'createRequestMessage':
+            (type: any, source: any, payload: any) =>
+                ({
+                    type,
+                    payload,
+                    meta: { requestUuid: mockedRequestUuid, source },
+                }) as any
+    }
+})
 
 const mockedAppId = `mocked-app-id`;
 const mockedInstanceId = `mocked-instance-id`;
@@ -74,7 +86,6 @@ tests.forEach(({ proxy }) => {
     describe(description, () => {
         let mockMessagingProvider: IMocked<IProxyMessagingProvider>;
         let mockChannels: IMocked<Channels>;
-        let mockedHelpers: IMocked<typeof helpersImport>;
 
         let appIdentifier: FullyQualifiedAppIdentifier;
 
@@ -98,20 +109,20 @@ tests.forEach(({ proxy }) => {
 
             mockChannels = Mock.create<Channels>();
 
-            mockedHelpers = Mock.create<typeof helpersImport>().setup(
-                setupFunction('generateUUID', () => mockedRequestUuid),
-                setupFunction('getTimestamp', () => mockedDate),
-                setupFunction(
-                    'createRequestMessage',
-                    (type, source, payload) =>
-                        ({
-                            type,
-                            payload,
-                            meta: { requestUuid: mockedRequestUuid, timestamp: currentDate, source },
-                        }) as any,
-                ),
-            );
-            registerMock(helpersImport, mockedHelpers.mock);
+            // mockedHelpers = Mock.create<typeof helpersImport>().setup(
+            //     setupFunction('generateUUID', () => mockedRequestUuid),
+            //     setupFunction('getTimestamp', () => mockedDate),
+            //     setupFunction(
+            //         'createRequestMessage',
+            //         (type, source, payload) =>
+            //             ({
+            //                 type,
+            //                 payload,
+            //                 meta: { requestUuid: mockedRequestUuid, timestamp: currentDate, source },
+            //             }) as any,
+            //     ),
+            // );
+            // registerMock(helpersImport, mockedHelpers.mock);
 
             appIdentifier = { appId: mockedAppId, instanceId: mockedInstanceId };
             requestUuIdentifier = mockedRequestUuid;
@@ -131,21 +142,21 @@ tests.forEach(({ proxy }) => {
         async function createInstance(): Promise<DesktopAgentProxy> {
             const agent = proxy
                 ? new DesktopAgentProxy({
-                      appIdentifier,
-                      messagingProvider: mockMessagingProvider.mock,
-                      channelFactory: Mock.create<ChannelFactory>().setup(
-                          setupFunction('createChannels', () => mockChannels.mock),
-                      ).mock,
-                  })
+                    appIdentifier,
+                    messagingProvider: mockMessagingProvider.mock,
+                    channelFactory: Mock.create<ChannelFactory>().setup(
+                        setupFunction('createChannels', () => mockChannels.mock),
+                    ).mock,
+                })
                 : new DesktopAgentImpl({
-                      appIdentifier,
-                      rootMessagePublisher: mockMessagingProvider.mock as RootMessagePublisher,
-                      directory: Mock.create<AppDirectory>().mock,
-                      channelFactory: Mock.create<ChannelFactory>().setup(
-                          setupFunction('createChannels', () => mockChannels.mock),
-                          setupFunction('createMessageHandler', () => Mock.create<ChannelMessageHandler>().mock),
-                      ).mock,
-                  });
+                    appIdentifier,
+                    rootMessagePublisher: mockMessagingProvider.mock as RootMessagePublisher,
+                    directory: Mock.create<AppDirectory>().mock,
+                    channelFactory: Mock.create<ChannelFactory>().setup(
+                        setupFunction('createChannels', () => mockChannels.mock),
+                        setupFunction('createMessageHandler', () => Mock.create<ChannelMessageHandler>().mock),
+                    ).mock,
+                });
 
             // Wait for messaging provider to be resolved
             await wait();

@@ -17,21 +17,25 @@ import {
     reset,
     setupFunction,
 } from '@morgan-stanley/ts-mocking-bird';
-import { AppDirectory } from '../app-directory';
+import { AppDirectory } from '../app-directory/index.js';
 import {
     FullyQualifiedAppIdentifier,
     IProxyMessagingProvider,
     IRootMessagingProvider,
     MessagingProviderFactory,
     UIProviderFactory,
-} from '../contracts';
-import * as helpersImport from '../helpers';
-import { RootMessagePublisher } from '../messaging';
-import { DesktopAgentImpl } from './desktop-agent';
-import { DesktopAgentFactory } from './desktop-agent.factory';
-import { DesktopAgentProxy } from './desktop-agent-proxy';
+} from '../contracts.js';
+import * as helpersImport from '../helpers/index.js';
+import { RootMessagePublisher } from '../messaging/index.js';
+import { DesktopAgentImpl } from './desktop-agent.js';
+import { DesktopAgentFactory } from './desktop-agent.factory.js';
+import { DesktopAgentProxy } from './desktop-agent-proxy.js';
 
-jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
+import { describe, it, beforeEach, expect } from "vitest";
+
+
+
+// jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
 
 const mockedAppId = `mocked-app-id`;
 const mockedInstanceId = 'mocked-instance-id';
@@ -58,10 +62,10 @@ describe(`${DesktopAgentFactory.name} (desktop-agent.factory)`, () => {
     let defaultRootMessagingProviderFactory: MessagingProviderFactory<IRootMessagingProvider> | undefined;
     let rootMessagePublisherFactory:
         | ((
-              messagingProvider: IRootMessagingProvider,
-              directory: AppDirectory,
-              window: WindowProxy,
-          ) => RootMessagePublisher)
+            messagingProvider: IRootMessagingProvider,
+            directory: AppDirectory,
+            window: WindowProxy,
+        ) => RootMessagePublisher)
         | undefined;
 
     function createInstance(): DesktopAgentFactory {

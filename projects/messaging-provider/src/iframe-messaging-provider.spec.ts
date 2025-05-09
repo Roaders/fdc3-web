@@ -15,8 +15,8 @@ import * as fdc3lib from '@morgan-stanley/fdc3-web';
 import { Mock, registerMock, reset, setupFunction } from '@morgan-stanley/ts-mocking-bird';
 import { IframeMessagingProvider } from './iframe-messaging-provider';
 
-jest.mock('@morgan-stanley/fdc3-web', () =>
-    require('@morgan-stanley/ts-mocking-bird').proxyJestModule(require.resolve('@morgan-stanley/fdc3-web')),
+// jest.mock('@morgan-stanley/fdc3-web', () =>
+require('@morgan-stanley/ts-mocking-bird').proxyJestModule(require.resolve('@morgan-stanley/fdc3-web')),
 );
 
 const mockedRequestUuid = `mocked-generated-uuid`;
@@ -25,17 +25,17 @@ describe('IframeMessagingProvider', () => {
     let iframeMessagingProvider: IframeMessagingProvider;
     let mockedDocument: Document;
     let mockedIframe: HTMLIFrameElement;
-    let mockIframeLoadedListener: jest.Mock<any, any>;
-    let mockWindowMessageListeners: jest.Mock<any, any>[];
-    let mockedIframePostMessage: jest.Mock<any, any>;
-    let mockedMessageChannel: MessageChannel;
+    let mockIframeLoadedListener: // jest.mock<any, any>;
+        let mockWindowMessageListeners: // jest.mock<any, any>[];
+            let mockedIframePostMessage: // jest.mock<any, any>;
+            let mockedMessageChannel: MessageChannel;
     let mockedConsole: Console;
     let mockedWindow: Window;
     let roundTripNonce: string | undefined;
     let mockedFdc3lib: any;
 
     beforeAll(() => {
-        function channelMock() {}
+        function channelMock() { }
         channelMock.prototype = {
             port1: {
                 onmessage: null,
@@ -89,8 +89,8 @@ describe('IframeMessagingProvider', () => {
                 appendChild: jest.fn(),
             },
         } as any as Document;
-        mockedConsole = jest.mocked(window.console);
-        mockedConsole.log = jest.fn();
+        mockedConsole = // jest.mocked(window.console);
+            mockedConsole.log = jest.fn();
         mockedWindow = {
             parent: {
                 postMessage: jest.fn().mockImplementation((message: any) => {

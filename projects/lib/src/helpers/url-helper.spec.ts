@@ -9,10 +9,12 @@
  * and limitations under the License. */
 
 import { Mock, proxyJestModule, registerMock, setupFunction } from '@morgan-stanley/ts-mocking-bird';
-import { decodeUUUrl, generateUUUrl } from './url-helper';
-import * as helpersImport from './uuid.helper';
+import { decodeUUUrl, generateUUUrl } from './url-helper.js';
+import * as helpersImport from './uuid.helper.js';
 
-jest.mock('./uuid.helper', () => proxyJestModule(require.resolve('./uuid.helper')));
+import { describe, it, beforeEach, expect } from "vitest";
+
+// jest.mock('./uuid.helper', () => proxyJestModule(require.resolve('./uuid.helper')));
 
 const mockedGeneratedUuid = `mocked-generated-Uuid`;
 

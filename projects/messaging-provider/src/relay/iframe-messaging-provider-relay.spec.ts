@@ -16,13 +16,13 @@ describe('IframeRelay', () => {
     let iframeRelay: IframeRelay;
     let mockedWindow: Window;
     let mockParentWindowCallback: (event: MessageEvent) => void;
-    let stubAddEventListener: jest.Mock;
-    let mockedConsole: Console;
+    let stubAddEventListener: // jest.mock;
+        let mockedConsole: Console;
     let mockedBroadcastChannel: BroadcastChannel;
     let mockedMessagePort: MessagePort;
 
     beforeAll(() => {
-        function channelMock() {}
+        function channelMock() { }
         channelMock.prototype = {
             name: null,
             onmessage: null,
@@ -54,11 +54,11 @@ describe('IframeRelay', () => {
                 postMessage: jest.fn(),
             },
         } as any as Window;
-        mockedConsole = jest.mocked(console);
+        mockedConsole = // jest.mocked(console);
 
-        mockedBroadcastChannel = {
-            postMessage: jest.fn(),
-        } as any as BroadcastChannel;
+            mockedBroadcastChannel = {
+                postMessage: jest.fn(),
+            } as any as BroadcastChannel;
         jest.spyOn(window, 'BroadcastChannel').mockReturnValue(mockedBroadcastChannel);
 
         mockedMessagePort = {

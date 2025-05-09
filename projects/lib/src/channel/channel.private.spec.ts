@@ -16,13 +16,15 @@ import {
     IProxyMessagingProvider,
     IProxyOutgoingMessageEnvelope,
     ResponseMessage,
-} from '../contracts';
-import * as helpersImport from '../helpers';
-import { PrivateChannel } from './channel.private';
-import { PublicChannel } from './channel.public';
-import { ChannelFactory } from './channels.factory';
+} from '../contracts.js';
+import * as helpersImport from '../helpers/index.js';
+import { PrivateChannel } from './channel.private.js';
+import { PublicChannel } from './channel.public.js';
+import { ChannelFactory } from './channels.factory.js';
 
-jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
+import { describe, it, beforeEach, expect } from "vitest";
+
+// jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
 
 const mockedAppId = `mocked-app-id`;
 const mockedInstanceId = `mocked-instance-id`;
@@ -524,15 +526,15 @@ describe(`${PrivateChannel.name} (channel.private)`, () => {
 
             listener.unsubscribe();
             const privateChannelUnsubscribeEventListenerResponse: BrowserTypes.PrivateChannelUnsubscribeEventListenerResponse =
-                {
-                    meta: {
-                        requestUuid: mockedRequestUuid,
-                        timestamp: currentDate,
-                        responseUuid: mockedResponseUuid,
-                    },
-                    payload: {},
-                    type: 'privateChannelUnsubscribeEventListenerResponse',
-                };
+            {
+                meta: {
+                    requestUuid: mockedRequestUuid,
+                    timestamp: currentDate,
+                    responseUuid: mockedResponseUuid,
+                },
+                payload: {},
+                type: 'privateChannelUnsubscribeEventListenerResponse',
+            };
 
             postMessage(privateChannelUnsubscribeEventListenerResponse);
 

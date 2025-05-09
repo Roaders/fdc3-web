@@ -28,25 +28,27 @@ import {
     setupFunction,
     setupProperty,
 } from '@morgan-stanley/ts-mocking-bird';
-import { peerDependencies } from '../../package.json';
-import { AppDirectory } from '../app-directory';
-import { AppDirectoryApplication } from '../app-directory.contracts';
-import { ChannelFactory, Channels } from '../channel';
-import { ChannelMessageHandler } from '../channel/channel-message-handler';
-import { HEARTBEAT } from '../constants';
+import { peerDependencies } from '../../package.json' with { type: 'json' };
+import { AppDirectory } from '../app-directory/index.js';
+import { AppDirectoryApplication } from '../app-directory.contracts.js';
+import { ChannelFactory, Channels } from '../channel/index.js';
+import { ChannelMessageHandler } from '../channel/channel-message-handler.js';
+import { HEARTBEAT } from '../constants.js';
 import {
     EventMessage,
     FullyQualifiedAppIdentifier,
     IOpenApplicationStrategy,
     RequestMessage,
     ResponseMessage,
-} from '../contracts';
-import * as helpersImport from '../helpers';
-import { isFullyQualifiedAppId } from '../helpers';
-import { RootMessagePublisher } from '../messaging';
-import { DesktopAgentImpl } from './desktop-agent';
+} from '../contracts.js';
+import * as helpersImport from '../helpers/index.js';
+import { isFullyQualifiedAppId } from '../helpers/index.js';
+import { RootMessagePublisher } from '../messaging/index.js';
+import { DesktopAgentImpl } from './desktop-agent.js';
 
-jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
+import { describe, it, beforeEach, expect } from "vitest";
+
+// jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
 
 const mockedRootAppId = `mocked-root-app-id@mock-app-directory`;
 const mockedRootInstanceId = `mocked-root-instance-id`;
@@ -2186,17 +2188,17 @@ describe(`${DesktopAgentImpl.name} (desktop-agent)`, () => {
                 createInstance();
 
                 const privateChannelUnsubscribeEventListenerRequest: BrowserTypes.PrivateChannelUnsubscribeEventListenerRequest =
-                    {
-                        meta: {
-                            requestUuid: mockedRequestUuid,
-                            timestamp: currentDate,
-                            source,
-                        },
-                        payload: {
-                            listenerUUID: 'mocked-listener-uuid',
-                        },
-                        type: 'privateChannelUnsubscribeEventListenerRequest',
-                    };
+                {
+                    meta: {
+                        requestUuid: mockedRequestUuid,
+                        timestamp: currentDate,
+                        source,
+                    },
+                    payload: {
+                        listenerUUID: 'mocked-listener-uuid',
+                    },
+                    type: 'privateChannelUnsubscribeEventListenerRequest',
+                };
 
                 await postRequestMessage(privateChannelUnsubscribeEventListenerRequest, source);
 

@@ -27,8 +27,8 @@ import {
 import { RootWindowMessagingProvider } from './root-window-messaging-provider';
 
 /* eslint @typescript-eslint/no-var-requires: "off" */
-jest.mock('@morgan-stanley/fdc3-web', () =>
-    require('@morgan-stanley/ts-mocking-bird').proxyJestModule(require.resolve('@morgan-stanley/fdc3-web')),
+// jest.mock('@morgan-stanley/fdc3-web', () =>
+require('@morgan-stanley/ts-mocking-bird').proxyJestModule(require.resolve('@morgan-stanley/fdc3-web')),
 );
 
 const channelOne = 'channelOne';
@@ -68,7 +68,7 @@ describe('RootWindowMessagingProvider', () => {
 
     describe('constructor', () => {
         beforeAll(() => {
-            function channelMock() {}
+            function channelMock() { }
             channelMock.prototype = {
                 name: null,
                 onmessage: null,
@@ -99,8 +99,8 @@ describe('RootWindowMessagingProvider', () => {
     });
 
     describe('registerNewDesktopAgentProxyListener', () => {
-        let mockWindowMessageListener: jest.Mock<any, any>;
-        let mockedWindow: Window;
+        let mockWindowMessageListener: // jest.mock<any, any>;
+            let mockedWindow: Window;
 
         beforeEach(() => {
             mockedWindow = {

@@ -13,17 +13,18 @@ import {
     any,
     IMocked,
     Mock,
-    proxyJestModule,
     registerMock,
     setupFunction,
     setupProperty,
 } from '@morgan-stanley/ts-mocking-bird';
-import { AppDirectoryApplicationType } from '../app-directory.contracts';
-import { OpenApplicationStrategyParams } from '../contracts';
-import * as helpersImport from '../helpers';
-import { FallbackOpenStrategy } from './fallback-open-strategy';
+import { AppDirectoryApplicationType } from '../app-directory.contracts.js';
+import { OpenApplicationStrategyParams } from '../contracts.js';
+import * as helpersImport from '../helpers/index.js';
+import { FallbackOpenStrategy } from './fallback-open-strategy.js';
 
-jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
+import { describe, it, beforeEach, expect } from "vitest";
+
+//// jest.mock('../helpers', () => proxyJestModule(require.resolve('../helpers')));
 
 const mockAppUrl = 'mock-app-url';
 const incorrectMockAppUrl = 'incorrect-mock-app-url';
