@@ -174,9 +174,10 @@ export class RootMessagePublisher implements IRootPublisher {
             | BrowserTypes.WebConnectionProtocol4ValidateAppIdentity
             | BrowserTypes.WebConnectionProtocol6Goodbye
         >,
+        messageSource?: MessageEventSource,
     ): void {
         if (isWCPValidateAppIdentity(message.payload)) {
-            this.registerNewInstance(message.payload, message.channelId);
+            this.registerNewInstance(message.payload, message.channelId, messageSource);
             return;
         }
 
@@ -217,12 +218,22 @@ export class RootMessagePublisher implements IRootPublisher {
         this.requestMessageHandler(message, source);
     }
 
+    private awaitedWindowIdentities: WeakMap<MessageEventSource, (identity: FullyQualifiedAppIdentifier) => void> =
+        new WeakMap();
+
+    public awaitAppIdentityForWindow(childWindow: WindowProxy): Promise<FullyQualifiedAppIdentifier> {
+        return new Promise(resolve => {
+            this.awaitedWindowIdentities.set(childWindow, resolve);
+        });
+    }
+
     /**
      * generates a new instance id and new app identifier for a new proxy agent that is performing a handshake
      */
     private async registerNewInstance(
         validateMessage: BrowserTypes.WebConnectionProtocol4ValidateAppIdentity,
         channelId: string,
+        messageSource?: MessageEventSource,
     ): Promise<FullyQualifiedAppIdentifier | undefined> {
         this.log('Registering new instance', LogLevel.DEBUG, { validateMessage, channelId });
 
@@ -251,6 +262,10 @@ export class RootMessagePublisher implements IRootPublisher {
         };
 
         this.connectionAttemptUuidCallbacks[validateMessage.meta.connectionAttemptUuid]?.(identifier);
+
+        if (messageSource != null) {
+            this.awaitedWindowIdentities.get(messageSource)?.(identifier);
+        }
 
         this.rootMessagingProvider.publish({ payload: response, channelIds: [channelId] });
 

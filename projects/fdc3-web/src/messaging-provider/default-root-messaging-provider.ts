@@ -62,6 +62,7 @@ export class DefaultRootMessagingProvider implements IRootMessagingProvider {
      */
     private onWindowMessage(message: MessageEvent): void {
         if (isWCPHelloMessage(message.data)) {
+            const sourceWindow = message.source;
             const channelId = generateUUID();
 
             const messageChannel =
@@ -73,11 +74,9 @@ export class DefaultRootMessagingProvider implements IRootMessagingProvider {
             // listen to incoming messages on the new channel
             messageChannel.port1.addEventListener('message', message => {
                 for (const callback of this.callbacks) {
-                    callback({ payload: message.data, channelId });
+                    callback({ payload: message.data, channelId }, sourceWindow ?? undefined);
                 }
             });
-
-            const sourceWindow = message.source;
 
             const response = generateHandshakeResponseMessage(message.data);
 

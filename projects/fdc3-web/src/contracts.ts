@@ -151,6 +151,7 @@ export type IProxyIncomingMessageEnvelope = {
  */
 export type IncomingMessageCallback<T extends IProxyIncomingMessageEnvelope | IRootIncomingMessageEnvelope<any>> = (
     message: T,
+    messageSource?: MessageEventSource,
 ) => void;
 
 /**
