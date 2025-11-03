@@ -17,7 +17,7 @@ import type {
     DesktopAgent,
     Listener,
     PrivateChannel as FDC3PrivateChannel,
-} from '@finos/fdc3';
+} from '@finos/fdc3-commonjs';
 import { FullyQualifiedAppIdentifier, IProxyMessagingProvider } from '../contracts.js';
 import {
     createRequestMessage,

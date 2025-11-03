@@ -17,7 +17,7 @@ import {
     LogLevel,
     OpenError,
     ResolveError,
-} from '@finos/fdc3';
+} from '@finos/fdc3-commonjs';
 import { AppDirectoryApplication } from '../app-directory.contracts.js';
 import {
     BackoffRetryParams,

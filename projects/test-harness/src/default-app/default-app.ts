@@ -23,8 +23,8 @@ import type {
     IntentResult,
     PrivateChannel as FDC3PrivateChannel,
     PrivateChannelEventTypes,
-} from '@finos/fdc3';
-import { LogLevel } from '@finos/fdc3';
+} from '@finos/fdc3-commonjs';
+import { LogLevel } from '@finos/fdc3-commonjs';
 import {
     AppDirectoryApplication,
     createLogger,

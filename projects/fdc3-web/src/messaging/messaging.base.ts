@@ -8,8 +8,8 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import type { BrowserTypes, GetAgentLogLevels } from '@finos/fdc3';
-import { LogLevel } from '@finos/fdc3';
+import type { BrowserTypes, GetAgentLogLevels } from '@finos/fdc3-commonjs';
+import { LogLevel } from '@finos/fdc3-commonjs';
 import {
     FullyQualifiedAppIdentifier,
     HandshakeMessage,

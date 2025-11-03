@@ -8,7 +8,7 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import type { BrowserTypes, Channel, Context, ContextHandler, DisplayMetadata, Listener } from '@finos/fdc3';
+import type { BrowserTypes, Channel, Context, ContextHandler, DisplayMetadata, Listener } from '@finos/fdc3-commonjs';
 import { FullyQualifiedAppIdentifier, IProxyMessagingProvider } from '../contracts.js';
 import { createRequestMessage, isBroadcastResponse, resolveContextType } from '../helpers/index.js';
 import { MessagingBase } from '../messaging/index.js';

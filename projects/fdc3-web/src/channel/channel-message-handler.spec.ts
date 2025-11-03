@@ -8,7 +8,15 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import { BrowserTypes, ChannelError, Contact, Context, EventHandler, Listener, PrivateChannel } from '@finos/fdc3';
+import {
+    BrowserTypes,
+    ChannelError,
+    Contact,
+    Context,
+    EventHandler,
+    Listener,
+    PrivateChannel,
+} from '@finos/fdc3-commonjs';
 import {
     IMocked,
     Mock,

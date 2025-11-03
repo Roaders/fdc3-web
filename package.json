@@ -26,7 +26,7 @@
         "@eslint/compat": "^1.4.1",
         "@eslint/eslintrc": "^3.3.1",
         "@eslint/js": "^9.39.0",
-        "@finos/fdc3": "^2.2.0",
+        "@finos/fdc3-commonjs": "file:../fdc3/packages/fdc3-commonjs/finos-fdc3-commonjs-2.2.0.tgz",
         "@morgan-stanley/ts-mocking-bird": "^1.3.4",
         "@nx/esbuild": "21.6.8",
         "@nx/eslint": "21.6.8",

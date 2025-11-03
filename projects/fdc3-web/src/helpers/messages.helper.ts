@@ -8,7 +8,7 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import { BrowserTypes } from '@finos/fdc3';
+import { BrowserTypes } from '@finos/fdc3-commonjs';
 import { FDC3_VERSION } from '../constants.js';
 import { FullyQualifiedAppIdentifier, RequestMessage } from '../contracts.js';
 import { isWCPHelloMessage } from './finos-type-predicate.helper.js';

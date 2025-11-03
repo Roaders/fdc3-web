@@ -24,8 +24,8 @@ import type {
     IntentResult,
     Listener,
     PrivateChannel,
-} from '@finos/fdc3';
-import { OpenError, ResolveError } from '@finos/fdc3';
+} from '@finos/fdc3-commonjs';
+import { OpenError, ResolveError } from '@finos/fdc3-commonjs';
 import {
     IMocked,
     Mock,

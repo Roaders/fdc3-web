@@ -8,7 +8,7 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import { BrowserTypes, ChannelError, Context, PrivateChannelEventTypes } from '@finos/fdc3';
+import { BrowserTypes, ChannelError, Context, PrivateChannelEventTypes } from '@finos/fdc3-commonjs';
 import { IRootPublisher } from '../contracts.internal.js';
 import { EventListenerLookup, FullyQualifiedAppIdentifier } from '../contracts.js';
 import { convertToPrivateChannelEventTypes } from '../helpers/event-type.helper.js';

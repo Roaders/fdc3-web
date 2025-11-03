@@ -16,7 +16,7 @@ import {
     GetAgentParams,
     GetAgentType,
     LogLevel,
-} from '@finos/fdc3';
+} from '@finos/fdc3-commonjs';
 import { DesktopAgentFactory } from '../agent/index.js';
 import { DEFAULT_AGENT_DISCOVERY_TIMEOUT, FDC3_READY_EVENT } from '../constants.js';
 import { IProxyMessagingProvider } from '../contracts.js';

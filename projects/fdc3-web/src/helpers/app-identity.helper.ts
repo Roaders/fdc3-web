@@ -8,7 +8,7 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import type { AppIdentifier } from '@finos/fdc3';
+import type { AppIdentifier } from '@finos/fdc3-commonjs';
 import { FullyQualifiedAppIdentifier } from '../contracts.js';
 
 /**

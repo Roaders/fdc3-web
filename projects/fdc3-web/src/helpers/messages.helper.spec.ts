@@ -8,7 +8,7 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import { BrowserTypes } from '@finos/fdc3';
+import { BrowserTypes } from '@finos/fdc3-commonjs';
 import { IMocked, Mock, proxyModule, registerMock, setupFunction } from '@morgan-stanley/ts-mocking-bird';
 import { afterEach, beforeEach, describe, expect, it, Mock as viMock, vi } from 'vitest';
 import { FDC3_VERSION } from '../constants.js';

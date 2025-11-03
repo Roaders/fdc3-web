@@ -8,7 +8,7 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import { AppMetadata } from '@finos/fdc3';
+import { AppMetadata } from '@finos/fdc3-commonjs';
 
 export type IntentPopupState = { name: string; activeInstances: AppMetadata[]; inactiveApps: AppMetadata[] };
 export type ContextPopupState = Record<string, { activeInstances: AppMetadata[]; inactiveApps: AppMetadata[] }>;

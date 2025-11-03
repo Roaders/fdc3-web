@@ -16,7 +16,7 @@ import type {
     ContextMetadata,
     ContextType,
     Listener,
-} from '@finos/fdc3';
+} from '@finos/fdc3-commonjs';
 import { FullyQualifiedAppIdentifier, IProxyMessagingProvider } from '../contracts.js';
 import {
     createRequestMessage,

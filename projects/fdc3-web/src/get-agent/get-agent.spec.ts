@@ -8,7 +8,7 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import { AgentError, DesktopAgent, LogLevel } from '@finos/fdc3';
+import { AgentError, DesktopAgent, LogLevel } from '@finos/fdc3-commonjs';
 import { Mock } from '@morgan-stanley/ts-mocking-bird';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { FDC3_READY_EVENT } from '../constants.js';

@@ -30,7 +30,7 @@ import {
     Listener,
     LogLevel,
     PrivateChannel,
-} from '@finos/fdc3';
+} from '@finos/fdc3-commonjs';
 import { ChannelFactory, Channels } from '../channel/index.js';
 import { FullyQualifiedAppIdentifier, IProxyMessagingProvider } from '../contracts.js';
 import { convertToFDC3EventTypes } from '../helpers/event-type.helper.js';

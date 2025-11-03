@@ -8,7 +8,7 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import { BrowserTypes, LogLevel } from '@finos/fdc3';
+import { BrowserTypes, LogLevel } from '@finos/fdc3-commonjs';
 import { AppDirectoryApplication } from '../app-directory.contracts.js';
 import { AppDirectory } from '../app-directory/index.js';
 import { IRootPublisher } from '../contracts.internal.js';

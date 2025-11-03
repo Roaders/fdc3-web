@@ -12,7 +12,7 @@
     },
     "peerDependencies": {
         "@morgan-stanley/fdc3-web": "0.8.1",
-        "@finos/fdc3": "^2.2.0"
+        "@finos/fdc3-commonjs": "^2.2.0"
     },
     "dependencies": {
         "lit": "^3.3.1",

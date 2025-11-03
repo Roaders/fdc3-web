@@ -8,8 +8,8 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import type { AppIdentifier, AppIntent, Context, DesktopAgent, Intent } from '@finos/fdc3';
-import { OpenError, ResolveError } from '@finos/fdc3';
+import type { AppIdentifier, AppIntent, Context, DesktopAgent, Intent } from '@finos/fdc3-commonjs';
+import { OpenError, ResolveError } from '@finos/fdc3-commonjs';
 import { IMocked, Mock, setupFunction } from '@morgan-stanley/ts-mocking-bird';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { ResolveForContextPayload, ResolveForIntentPayload } from '../contracts.js';

@@ -8,7 +8,7 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import type { BrowserTypes, Channel, PrivateChannel as FDC3PrivateChannel } from '@finos/fdc3';
+import type { BrowserTypes, Channel, PrivateChannel as FDC3PrivateChannel } from '@finos/fdc3-commonjs';
 import { IRootPublisher } from '../contracts.internal.js';
 import { FullyQualifiedAppIdentifier, IProxyMessagingProvider } from '../contracts.js';
 import { IChannelFactory } from './channel.contracts.js';

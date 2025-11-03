@@ -8,7 +8,7 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import { GetAgentLogLevels, LogLevel } from '@finos/fdc3';
+import { GetAgentLogLevels, LogLevel } from '@finos/fdc3-commonjs';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createLogger } from './log.helper.js';
 

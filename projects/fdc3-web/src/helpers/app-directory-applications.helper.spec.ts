@@ -8,7 +8,7 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import { AppMetadata, BrowserTypes } from '@finos/fdc3';
+import { AppMetadata, BrowserTypes } from '@finos/fdc3-commonjs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { AppDirectoryApplication } from '../app-directory.contracts.js';
 import { FDC3_PROVIDER, FDC3_VERSION } from '../constants.js';

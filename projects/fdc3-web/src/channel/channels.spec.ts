@@ -16,8 +16,8 @@ import type {
     DisplayMetadata,
     Listener,
     PrivateChannel,
-} from '@finos/fdc3';
-import { ChannelError } from '@finos/fdc3';
+} from '@finos/fdc3-commonjs';
+import { ChannelError } from '@finos/fdc3-commonjs';
 import {
     IMocked,
     Mock,

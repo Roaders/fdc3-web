@@ -8,7 +8,7 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import { type DesktopAgent, LogLevel } from '@finos/fdc3';
+import { type DesktopAgent, LogLevel } from '@finos/fdc3-commonjs';
 import { DefaultResolver } from '../app-directory/app-resolver.default.js';
 import { AppDirectory } from '../app-directory/index.js';
 import { ChannelFactory } from '../channel/index.js';

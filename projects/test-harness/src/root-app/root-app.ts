@@ -11,7 +11,7 @@
 import './root-app.css';
 import './settings-panel.js';
 import './app-container.js';
-import { AppIdentifier, Channel, Context, LogLevel, OpenError } from '@finos/fdc3';
+import { AppIdentifier, Channel, Context, LogLevel, OpenError } from '@finos/fdc3-commonjs';
 import {
     AppDirectoryApplication,
     BackoffRetryParams,

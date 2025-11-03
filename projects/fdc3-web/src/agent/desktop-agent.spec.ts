@@ -18,7 +18,7 @@ import {
     type Listener,
     OpenError,
     ResolveError,
-} from '@finos/fdc3';
+} from '@finos/fdc3-commonjs';
 import {
     IMocked,
     Mock,
@@ -1097,7 +1097,7 @@ describe(`${DesktopAgentImpl.name} (desktop-agent)`, () => {
 
                 await postRequestMessage(getInfoMessage, source);
 
-                const version = packageJson.peerDependencies['@finos/fdc3'];
+                const version = packageJson.peerDependencies['@finos/fdc3-commonjs'];
                 const expectedVersion = (
                     version.indexOf('^') !== -1
                         ? version.slice(version.indexOf('^') + 1)

@@ -8,7 +8,7 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import { OpenError } from '@finos/fdc3';
+import { OpenError } from '@finos/fdc3-commonjs';
 import { IOpenApplicationStrategy, OpenApplicationStrategyParams } from '../contracts.js';
 import { isWebAppDetails, subscribeToConnectionAttemptUuids } from '../helpers/index.js';
 

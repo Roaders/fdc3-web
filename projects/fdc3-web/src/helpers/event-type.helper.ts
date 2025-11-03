@@ -8,7 +8,7 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import type { BrowserTypes, FDC3EventTypes, PrivateChannelEventTypes } from '@finos/fdc3';
+import type { BrowserTypes, FDC3EventTypes, PrivateChannelEventTypes } from '@finos/fdc3-commonjs';
 import { EventListenerKey } from '../contracts.js';
 
 type PrivateChannelEventMessageTypes = Extract<

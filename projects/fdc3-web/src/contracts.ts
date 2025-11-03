@@ -19,7 +19,7 @@ import type {
     GetAgentLogLevels,
     Intent,
     PrivateChannelEvent,
-} from '@finos/fdc3';
+} from '@finos/fdc3-commonjs';
 import { AppDirectoryApplication } from './app-directory.contracts.js';
 
 export type RequestMessage =

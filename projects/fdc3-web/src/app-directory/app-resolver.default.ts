@@ -8,8 +8,8 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import type { AppIdentifier, Context, DesktopAgent } from '@finos/fdc3';
-import { OpenError, ResolveError } from '@finos/fdc3';
+import type { AppIdentifier, Context, DesktopAgent } from '@finos/fdc3-commonjs';
+import { OpenError, ResolveError } from '@finos/fdc3-commonjs';
 import {
     FullyQualifiedAppIdentifier,
     IAppResolver,

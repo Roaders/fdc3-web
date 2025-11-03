@@ -8,7 +8,7 @@
  * or implied. See the License for the specific language governing permissions
  * and limitations under the License. */
 
-import { ContextHandler } from '@finos/fdc3';
+import { ContextHandler } from '@finos/fdc3-commonjs';
 import { describe, expect, it } from 'vitest';
 import { resolveContextType } from './context.helper.js';
 
