@@ -17,6 +17,7 @@ import type {
     FDC3Event,
     FDC3EventTypes,
     GetAgentLogLevels,
+    GetAgentParams as FinosGetAgentParams,
     Intent,
     PrivateChannelEvent,
 } from '@finos/fdc3';
@@ -284,4 +285,15 @@ export interface IOpenApplicationStrategy {
      * @param params
      */
     open(params: OpenApplicationStrategyParams, context?: Context): Promise<string>;
+}
+
+export interface GetAgentParams extends FinosGetAgentParams {
+    /**
+     * Forces the creation of a new agent or the creation of a DesktopAgentProxy with a connection to a parent root agent
+     * When this argument is used the following changes are made:
+     * getAgent does not check for and return window.fdc3 even if it exists
+     * getAgent does not check for previous invocations and does not return previous results
+     * getAgent does not store the result of the call to be returned on subsequent calls
+     */
+    force?: boolean;
 }

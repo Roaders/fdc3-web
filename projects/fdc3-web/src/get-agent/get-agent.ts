@@ -13,13 +13,13 @@ import {
     BrowserTypes,
     DesktopAgent,
     GetAgentLogLevels,
-    GetAgentParams,
+    GetAgentParams as FinosGetAgentParams,
     GetAgentType,
     LogLevel,
 } from '@finos/fdc3';
 import { DesktopAgentFactory } from '../agent/index.js';
 import { DEFAULT_AGENT_DISCOVERY_TIMEOUT, FDC3_READY_EVENT } from '../constants.js';
-import { IProxyMessagingProvider } from '../contracts.js';
+import { GetAgentParams, IProxyMessagingProvider } from '../contracts.js';
 import {
     createLogger,
     discoverProxyCandidates,
@@ -70,7 +70,7 @@ let agentPromise: Promise<DesktopAgent> | undefined;
  * };
  */
 export const getAgent: GetAgentType = async (params?: GetAgentParams): Promise<DesktopAgent> => {
-    if (agentPromise != null) {
+    if (agentPromise != null && params?.force !== true) {
         if (params != null) {
             console.warn(`Parameters passed to getAgent ignored`, params);
             console.warn(
@@ -81,9 +81,13 @@ export const getAgent: GetAgentType = async (params?: GetAgentParams): Promise<D
         return agentPromise;
     }
 
-    agentPromise = getAgentImpl(params);
+    const result = getAgentImpl(params);
 
-    return agentPromise;
+    if (params?.force !== true) {
+        agentPromise = result;
+    }
+
+    return result;
 };
 
 // Default loggers - will be configured with user options when getAgent is called
@@ -100,10 +104,12 @@ const getAgentImpl: GetAgentType = async (params?: GetAgentParams): Promise<Desk
 
     proxyLog(`getAgent called with params:`, LogLevel.DEBUG, params);
 
-    const existingAgent = await Promise.race([
-        waitForPreloadAgent(params?.timeoutMs),
-        waitForProxyAgent(params?.identityUrl, params),
-    ]);
+    const agentPromises =
+        params?.force === true
+            ? [waitForProxyAgent(params?.identityUrl, params)] // if we are forcing a new agent skip looking for existing agents
+            : [waitForPreloadAgent(params?.timeoutMs), waitForProxyAgent(params?.identityUrl, params)];
+
+    const existingAgent = await Promise.race(agentPromises);
 
     //TODO: look for details of existing agent in session storage
 
@@ -202,7 +208,7 @@ let windowHelloListeners: ((event: MessageEvent) => void)[] | undefined;
 /**
  * Attempts to locate a parent DesktopAgent and establish communication with it
  */
-async function waitForProxyAgent(identityUrl?: string, params?: GetAgentParams): Promise<DesktopAgent> {
+async function waitForProxyAgent(identityUrl?: string, params?: FinosGetAgentParams): Promise<DesktopAgent> {
     connectionLog(`waitForProxyAgent called`, LogLevel.DEBUG);
     const candidates = discoverProxyCandidates();
 
