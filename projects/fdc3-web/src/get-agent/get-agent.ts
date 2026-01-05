@@ -106,8 +106,12 @@ const getAgentImpl: GetAgentType = async (params?: GetAgentParams): Promise<Desk
 
     const agentPromises =
         params?.force === true
-            ? [waitForProxyAgent(params?.identityUrl, params)] // if we are forcing a new agent skip looking for existing agents
-            : [waitForPreloadAgent(params?.timeoutMs), waitForProxyAgent(params?.identityUrl, params)];
+            ? [waitForProxyAgent(params?.identityUrl, params), createTimeoutPromise(params?.timeoutMs)] // if we are forcing a new agent skip looking for existing agents
+            : [
+                  waitForPreloadAgent(),
+                  waitForProxyAgent(params?.identityUrl, params),
+                  createTimeoutPromise(params?.timeoutMs),
+              ];
 
     const existingAgent = await Promise.race(agentPromises);
 
@@ -136,9 +140,6 @@ const getAgentImpl: GetAgentType = async (params?: GetAgentParams): Promise<Desk
     return Promise.reject(AgentError.AgentNotFound);
 };
 
-// timeout reference so we can clean it up later
-let fdc3ReadyTimeOut: number | undefined;
-
 // We keep a reference to the event handler here so we can unsubscribe from any function
 let onFdc3Ready: (() => void) | undefined;
 
@@ -148,9 +149,6 @@ let onFdc3Ready: (() => void) | undefined;
  */
 function cleanUp(): void {
     connectionLog(`cleanUp called`, LogLevel.DEBUG);
-    if (fdc3ReadyTimeOut != null) {
-        clearTimeout(fdc3ReadyTimeOut);
-    }
 
     if (onFdc3Ready != null) {
         window.removeEventListener(FDC3_READY_EVENT, onFdc3Ready);
@@ -170,22 +168,14 @@ function cleanUp(): void {
  * If it has not been set it waits for the fdc3Ready event and then returns window.fdc3
  * If no event is received then undefined is returned after the timeout which defaults to 750ms
  */
-function waitForPreloadAgent(optionalTimeout?: number): Promise<DesktopAgent | undefined> {
+function waitForPreloadAgent(): Promise<DesktopAgent | undefined> {
     connectionLog(`waitForPreloadAgent called`, LogLevel.DEBUG);
     if (window.fdc3 != null) {
         return Promise.resolve(window.fdc3);
     }
 
-    const timeoutInMs = optionalTimeout ?? DEFAULT_AGENT_DISCOVERY_TIMEOUT;
-
     return new Promise((resolve, reject) => {
         // timeout after 5 seconds if fdc3 ready event not fired
-        fdc3ReadyTimeOut = setTimeout(() => {
-            connectionLog(`timed out looking for existing agent`, LogLevel.INFO);
-            cleanUp();
-            resolve(undefined);
-        }, timeoutInMs) as any; // Typed as any as Typescript gets confused between nodejs types and browser types
-
         onFdc3Ready = () => {
             cleanUp();
 
@@ -199,6 +189,18 @@ function waitForPreloadAgent(optionalTimeout?: number): Promise<DesktopAgent | u
         };
 
         window.addEventListener('fdc3Ready', onFdc3Ready);
+    });
+}
+
+function createTimeoutPromise(optionalTimeout?: number): Promise<undefined> {
+    const timeoutInMs = optionalTimeout ?? DEFAULT_AGENT_DISCOVERY_TIMEOUT;
+
+    return new Promise(resolve => {
+        setTimeout(() => {
+            connectionLog(`timed out looking for existing agent`, LogLevel.INFO);
+            cleanUp();
+            resolve(undefined);
+        }, timeoutInMs) as any; // Typed as any as Typescript gets confused between nodejs types and browser types
     });
 }
 

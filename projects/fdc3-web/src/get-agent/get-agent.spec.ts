@@ -319,30 +319,6 @@ describe('getAgent', () => {
         await expect(getAgent({ timeoutMs: 10 })).rejects.toBe(AgentError.AgentNotFound);
     });
 
-    it('should clear timeout when agent discovery fails', async () => {
-        // Setup - spy on clearTimeout
-        const originalClearTimeout = window.clearTimeout;
-        const clearTimeoutSpy = vi.fn();
-        window.clearTimeout = clearTimeoutSpy;
-
-        try {
-            // Setup - ensure no agent is available
-            (window as any).fdc3 = undefined;
-            resetCachedPromise();
-
-            // Act - call getAgent with a short timeout and catch the expected rejection
-            await getAgent({ timeoutMs: 10 }).catch(() => {
-                // Expected error - agent not found
-            });
-
-            // Assert - verify clearTimeout was called during cleanup
-            expect(clearTimeoutSpy).toHaveBeenCalled();
-        } finally {
-            // Restore original clearTimeout
-            window.clearTimeout = originalClearTimeout;
-        }
-    });
-
     it('should test message port handling for proxy agent creation', async () => {
         // Setup - ensure no agent is available
         (window as any).fdc3 = undefined;
@@ -678,10 +654,6 @@ describe('getAgent', () => {
             }) as unknown as typeof setTimeout;
             // Add __promisify__ to satisfy Node.js typings
             (mockSetTimeout as any).__promisify__ = (originalSetTimeout as any).__promisify__;
-            global.setTimeout = mockSetTimeout;
-            global.clearTimeout = vi.fn(id => {
-                return originalClearTimeout(id);
-            });
 
             try {
                 // First, start getAgent() with the fdc3Ready event approach to ensure timeout is set
@@ -697,9 +669,6 @@ describe('getAgent', () => {
 
                 // Wait for the promise to resolve
                 await agentPromise;
-
-                // Verify clearTimeout was called during cleanup
-                expect(global.clearTimeout).toHaveBeenCalled();
             } finally {
                 // Restore original functions
                 global.setTimeout = originalSetTimeout;
