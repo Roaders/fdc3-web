@@ -1448,6 +1448,7 @@ describe(`${DesktopAgentImpl.name} (desktop-agent)`, () => {
                                 description: undefined,
                                 icons: undefined,
                                 screenshots: undefined,
+                                instanceMetadata: undefined,
                             },
                         },
                     },
