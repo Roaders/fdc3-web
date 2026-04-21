@@ -590,8 +590,28 @@ describe(`${AppDirectory.name} (directory)`, () => {
             const result = await instance.getAppInstances(mockedAppIdOne);
 
             expect(result).toEqual([
-                { appId: mockedAppIdOne, instanceId: 'instanceOne', title: 'app-title-one', version: undefined, tooltip: undefined, description: undefined, icons: undefined, screenshots: undefined, instanceMetadata: undefined },
-                { appId: mockedAppIdOne, instanceId: 'instanceFive', title: 'app-title-one', version: undefined, tooltip: undefined, description: undefined, icons: undefined, screenshots: undefined, instanceMetadata: undefined },
+                {
+                    appId: mockedAppIdOne,
+                    instanceId: 'instanceOne',
+                    title: 'app-title-one',
+                    version: undefined,
+                    tooltip: undefined,
+                    description: undefined,
+                    icons: undefined,
+                    screenshots: undefined,
+                    instanceMetadata: undefined,
+                },
+                {
+                    appId: mockedAppIdOne,
+                    instanceId: 'instanceFive',
+                    title: 'app-title-one',
+                    version: undefined,
+                    tooltip: undefined,
+                    description: undefined,
+                    icons: undefined,
+                    screenshots: undefined,
+                    instanceMetadata: undefined,
+                },
             ]);
         });
 
@@ -626,7 +646,19 @@ describe(`${AppDirectory.name} (directory)`, () => {
 
             const result = await instance.getAppInstances('app-id-one');
 
-            expect(result).toEqual([{ appId: mockedAppIdOne, instanceId: 'instanceOne', title: 'app-title-one', version: undefined, tooltip: undefined, description: undefined, icons: undefined, screenshots: undefined, instanceMetadata: undefined }]);
+            expect(result).toEqual([
+                {
+                    appId: mockedAppIdOne,
+                    instanceId: 'instanceOne',
+                    title: 'app-title-one',
+                    version: undefined,
+                    tooltip: undefined,
+                    description: undefined,
+                    icons: undefined,
+                    screenshots: undefined,
+                    instanceMetadata: undefined,
+                },
+            ]);
         });
 
         it(`should resolve fully-qualified appId from a different hostname to matching unqualified part`, async () => {
@@ -636,7 +668,19 @@ describe(`${AppDirectory.name} (directory)`, () => {
 
             const result = await instance.getAppInstances('app-id-one@different-hostname');
 
-            expect(result).toEqual([{ appId: mockedAppIdOne, instanceId: 'instanceOne', title: 'app-title-one', version: undefined, tooltip: undefined, description: undefined, icons: undefined, screenshots: undefined, instanceMetadata: undefined }]);
+            expect(result).toEqual([
+                {
+                    appId: mockedAppIdOne,
+                    instanceId: 'instanceOne',
+                    title: 'app-title-one',
+                    version: undefined,
+                    tooltip: undefined,
+                    description: undefined,
+                    icons: undefined,
+                    screenshots: undefined,
+                    instanceMetadata: undefined,
+                },
+            ]);
         });
 
         it('should return multiple app instances from different hostnames that match the unqualified appId if multiple fully qualified appIds exist in the directory', async () => {
@@ -653,8 +697,28 @@ describe(`${AppDirectory.name} (directory)`, () => {
             const result = await instance.getAppInstances('app-id-one');
 
             expect(result).toEqual([
-                { appId: mockedAppIdOne, instanceId: 'instanceOne', title: 'app-title-one', version: undefined, tooltip: undefined, description: undefined, icons: undefined, screenshots: undefined, instanceMetadata: undefined },
-                { appId: 'app-id-one@mock-alternate-directory', instanceId: 'instanceTwo', title: 'app-title-one', version: undefined, tooltip: undefined, description: undefined, icons: undefined, screenshots: undefined, instanceMetadata: undefined },
+                {
+                    appId: mockedAppIdOne,
+                    instanceId: 'instanceOne',
+                    title: 'app-title-one',
+                    version: undefined,
+                    tooltip: undefined,
+                    description: undefined,
+                    icons: undefined,
+                    screenshots: undefined,
+                    instanceMetadata: undefined,
+                },
+                {
+                    appId: 'app-id-one@mock-alternate-directory',
+                    instanceId: 'instanceTwo',
+                    title: 'app-title-one',
+                    version: undefined,
+                    tooltip: undefined,
+                    description: undefined,
+                    icons: undefined,
+                    screenshots: undefined,
+                    instanceMetadata: undefined,
+                },
             ]);
         });
     });
@@ -1370,7 +1434,19 @@ describe(`${AppDirectory.name} (directory)`, () => {
             instance.removeDisconnectedApp({ appId: mockedAppIdOne, instanceId: 'instanceOne' });
 
             const appInstances = await instance.getAppInstances(mockedAppIdOne);
-            expect(appInstances).toEqual([{ appId: mockedAppIdOne, instanceId: 'instanceTwo', title: 'app-title-one', version: undefined, tooltip: undefined, description: undefined, icons: undefined, screenshots: undefined, instanceMetadata: undefined }]);
+            expect(appInstances).toEqual([
+                {
+                    appId: mockedAppIdOne,
+                    instanceId: 'instanceTwo',
+                    title: 'app-title-one',
+                    version: undefined,
+                    tooltip: undefined,
+                    description: undefined,
+                    icons: undefined,
+                    screenshots: undefined,
+                    instanceMetadata: undefined,
+                },
+            ]);
         });
 
         it('should do nothing if app is not known to the directory', async () => {
@@ -1381,7 +1457,19 @@ describe(`${AppDirectory.name} (directory)`, () => {
             instance.removeDisconnectedApp({ appId: 'unknown-app-id', instanceId: 'instanceX' });
 
             const appInstances = await instance.getAppInstances(mockedAppIdOne);
-            expect(appInstances).toEqual([{ appId: mockedAppIdOne, instanceId: 'instanceOne', title: 'app-title-one', version: undefined, tooltip: undefined, description: undefined, icons: undefined, screenshots: undefined, instanceMetadata: undefined }]);
+            expect(appInstances).toEqual([
+                {
+                    appId: mockedAppIdOne,
+                    instanceId: 'instanceOne',
+                    title: 'app-title-one',
+                    version: undefined,
+                    tooltip: undefined,
+                    description: undefined,
+                    icons: undefined,
+                    screenshots: undefined,
+                    instanceMetadata: undefined,
+                },
+            ]);
         });
 
         it('should do nothing if instanceId is not known for the app', async () => {
@@ -1392,7 +1480,19 @@ describe(`${AppDirectory.name} (directory)`, () => {
             instance.removeDisconnectedApp({ appId: mockedAppIdOne, instanceId: 'unknown-instance-id' });
 
             const appInstances = await instance.getAppInstances(mockedAppIdOne);
-            expect(appInstances).toEqual([{ appId: mockedAppIdOne, instanceId: 'instanceOne', title: 'app-title-one', version: undefined, tooltip: undefined, description: undefined, icons: undefined, screenshots: undefined, instanceMetadata: undefined }]);
+            expect(appInstances).toEqual([
+                {
+                    appId: mockedAppIdOne,
+                    instanceId: 'instanceOne',
+                    title: 'app-title-one',
+                    version: undefined,
+                    tooltip: undefined,
+                    description: undefined,
+                    icons: undefined,
+                    screenshots: undefined,
+                    instanceMetadata: undefined,
+                },
+            ]);
         });
     });
 
