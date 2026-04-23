@@ -35,6 +35,7 @@ import { DesktopAgentNext } from "@morgan-stanley/fdc3-web";
 ### Fixed
 
  * Fixed `raiseIntent().getResult()` and `raiseIntentForContext().getResult()` hanging forever in loopback scenarios where the same agent both raises and handles an intent. The `raiseIntentResultResponse` listener is now registered before the request message is sent to prevent a race condition where the result arrives before the listener is set up.
+ * Fixed sourcemap `sourceMappingURL` paths in published packages pointing to monorepo-relative paths (e.g. `../../../projects/fdc3-web/src/...`) instead of being relative to the output file. Sourcemaps now resolve correctly when the packages are consumed in other projects.
 
 ## 0.11.2 (2026-02-26)
 
