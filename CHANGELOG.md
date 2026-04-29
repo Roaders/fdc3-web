@@ -1,3 +1,9 @@
+## 0.12.1 (2026-04-29)
+
+### Fixed
+
+ * Fixed `getAppIntent` (and related app directory lookups) not returning the root agent instance for intents declared on the root app's `appDirectoryEntry.interop.intents.listensFor`. The root agent's instance lookup is now populated from its application's declared intents, matching the behaviour used when registering other app instances.
+
 ## 0.12.0 (2026-04-16)
 
 ### Added
